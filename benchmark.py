@@ -22,13 +22,14 @@ __author__ = 'Abien Fred Agarap'
 
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
-from sklearn.linear_model import LogisticRegression, Perceptron
-from sklearn.naive_bayes import GaussianNB
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import LogisticRegression
+from sklearn.linear_model import Perceptron
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.neural_network import MLPClassifier
-from sklearn.svm import LinearSVC, SVC
-from sklearn.tree import DecisionTreeClassifier, ExtraTreeClassifier
+from sklearn.svm import SVC
+from sklearn.tree import DecisionTreeClassifier
 
 breast_cancer_data = datasets.load_breast_cancer()
 
