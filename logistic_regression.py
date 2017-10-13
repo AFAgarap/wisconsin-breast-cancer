@@ -27,7 +27,7 @@ import time
 
 class LogisticRegression:
     """Implementation of the Logistic Regression algorithm using TensorFlow"""
-    def __init__(self, alpha, batch_size, cell_size, dropout_rate, num_classes, sequence_length, svm_c):
+    def __init__(self, alpha, batch_size, num_classes, sequence_length):
         """Initialize the Logistic Regression class
 
         Parameter
@@ -42,17 +42,20 @@ class LogisticRegression:
           The number of features in a dataset.
         """
         self.alpha = alpha
-        self.batch_Size = batch_size
+        self.batch_size = batch_size
         self.num_classes = num_classes
         self.sequence_length = sequence_length
 
         def __graph__():
             # input placeholder for features (x) and labels (y)
             with tf.name_scope('input'):
+                # [BATCH_SIZE, SEQUENCE_LENGTH]
                 x_input = tf.placeholder(tf.float32, [None, self.sequence_length], name='x_input')
 
+                # [BATCH_SIZE]
                 y_input = tf.placeholder(tf.uint8, [None], name='y_input')
 
+                # [BATCH_SIZE, NUM_CLASSES]
                 y_onehot = tf.one_hot(indices=y_input, depth=self.num_classes, on_value=1.0, off_value=-1.0,
                                         name='y_onehot')
             
@@ -69,7 +72,6 @@ class LogisticRegression:
                     tf.summary.histogram('pre-activations', output)
                         
             with tf.name_scope('cross_entropy_loss'):
-                # get the loss of the training
                 cross_entropy = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=y_onehot, logits=output))
             tf.summary.scalar('loss', cross_entropy)
 
@@ -77,8 +79,6 @@ class LogisticRegression:
             train_op = tf.train.GradientDescentOptimizer(learning_rate=0.5).minimize(cross_entropy)
             
             with tf.name_scope('accuracy'):
-                # get the predicted probability distribution
-                predictions = tf.nn.softmax(y, name='predictions')
                 with tf.name_scope('correct_predition'):
                     # check if the actual labels and predicted labels match
                     correct = tf.equal(tf.argmax(output, 1), tf.argmax(y_onehot, 1))
@@ -86,6 +86,8 @@ class LogisticRegression:
                     # get the % of correct predictions
                     accuracy_op = tf.reduce_mean(tf.cast(correct, tf.float32))
             tf.summary.scalar('accuracy', accuracy)
+
+            merged = tf.summary.merge_all()
 
             self.x_input = x_input
             self.y_input = y_input
@@ -95,6 +97,7 @@ class LogisticRegression:
             self.cross_entropy = cross_entropy
             self.train_op = train_op
             self.accuracy_op = accuracy_op
+            self.merged = merged
 
         sys.stdout.write('\n<log> Building graph...')
         __graph__()
@@ -155,17 +158,40 @@ class LogisticRegression:
 
                     feed_dict = {self.x_input: train_example_batch, self.y_input: train_label_batch}
 
-                    _, loss, accuracy, predicted, actual = sess.run([self.train_op, self.loss, self.accuracy_op,
-                                                                     self.predictions, self.y_onehot],
-                                                                     feed_dict=feed_dict)
+                    summary, _, predicted, actual = sess.run([self.merged, self.train_op, self.loss, self.accuracy_op,
+                                                              self.predictions, self.y_onehot],
+                                                              feed_dict=feed_dict)
                     if step % 100 == 0 and step > 0:
-                        
+                        train_loss, train_accuracy = sess.run([self.loss, self.accuracy_op], feed_dict=feed_dict)
+
+                        print('step [{}] train -- loss : {}, accuracy : {}'.format(step, train_loss, train_accuracy))
+
+                        train_writer.add_summary(summary, step)
+
+                        saver.save(sess, checkpoint_path + model_name, global_step=step)
+
             except KeyboardInterrupt:
                 print('Training interrupted at step {}'.format(step))
                 os._exit(1)
             finally:
                 print('EOF -- Training done at step {}'.format(step))
 
+                for step in range(epochs * validation_size // self.batch_size):
+                    offset = (step * self.batch_size) % validation_size
+                    test_example_batch = validation_data[0][offset:(offset + self.batch_size)]
+                    test_label_batch = validation_data[1][offset:(offset + self.batch_size)]
+
+                    feed_dict = {self.x_input: test_example_batch, self.y_input: test_label_batch}
+
+                    test_summary, predicted, actual, test_loss, test_accuracy = sess.run([self.merged, self.predictions,
+                                                                                          self.y_onehot, self.loss,
+                                                                                          self.accuracy_op],
+                                                                                          feed_dict=feed_dict)
+
+                    if step % 100 == 0 and step > 0:
+                        print('step [{}] testing -- loss : {}, accuracy : {}'.format(step, test_loss, test_accuracy))
+                        
+                        test_writer.add_summary(test_summary, step)
 
     @staticmethod
     def variable_summaries(var):
