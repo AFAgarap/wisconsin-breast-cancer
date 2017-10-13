@@ -20,7 +20,9 @@ from __future__ import print_function
 __version__ = '0.1.0'
 __author__ = 'Abien Fred Agarap'
 
+import os
 import tensorflow as tf
+import time
 
 
 class LogisticRegression:
@@ -98,35 +100,72 @@ class LogisticRegression:
         __graph__()
         sys.stdout.write('</log>\n')
 
-    def train(self):
-        init = tf.global_variables_initializer()
+    def train(self, checkpoint_path, log_path, model_name, epochs, train_data, train_size, validation_data,
+              validation_size, result_path):
+        """Trains the model
+
+        Parameter
+        ---------
+        checkpoint_path : str
+          The path where to save the trained model.
+        log_path : str
+          The path where to save the TensorBoard summaries.
+        model_name : str
+          The filename for the trained model.
+        epochs : int
+          The number of passes through the whole dataset.
+        train_data : numpy.ndarray
+          The NumPy array training dataset.
+        train_size : int
+          The size of `train_data`.
+        validation_data : numpy.ndarray
+          The NumPy array testing dataset.
+        validation_size : int
+          The size of `validation_data`.
+        result_path : str
+          The path where to save the actual and predicted classes array.
+        """
+
+        if not os.path.exists(path=checkpoint_path):
+            os.mkdir(path=checkpoint_path)
+
+        saver = tf.train.Saver(max_to_keep=10)
+
+        init_op = tf.group(tf.global_variables_initializer(), tf.local_variables_initializer())
+
+        timestamp = str(time.asctime())
+
+        train_writer = tf.summary.FileWriter(logdir=log_path + timestamp + '-training', graph=tf.get_default_graph())
+        test_writer = tf.summary.FileWriter(logdir=log_path + timestamp + '-testing', graph=tf.get_default_graph())
 
         with tf.Session() as sess:
-            sess.run(init)
+            sess.run(init_op)
 
-            for step in range(1000):
-                # train by batch of 100
-                batch_xs, batch_ys = self.data_input.train.next_batch(100)
-                
-                # input dictionary
-                feed_dict = {self.x: batch_xs, self.y: batch_ys}
-                
-                # run the train operation
-                _ = sess.run([self.train_op], feed_dict=feed_dict)
-                
-                # every 100th step and at step 0,
-                # display the loss and accuracy of the model
-                if step % 100 == 0:
-                    loss, accuracy = sess.run([self.cross_entropy, self.accuracy_op], feed_dict=feed_dict)
+            checkpoint = tf.train.get_checkpoint_state(checkpoint_path)
 
-                    print('step [{}] -- loss: {}, accuracy: {}'.format(step, loss, accuracy))
+            if checkpoint and checkpoint.model_checkpoint_path:
+                saver = tf.train.import_meta_graph(checkpoint.model_checkpoint_path)
+                saver.restore(sess, tf.train.latest_checkpoint(checkpoint_path))
 
-            feed_dict = {self.x: self.data_input.test.images, self.y: self.data_input.test.labels}
-            
-            # get the accuracy of the train model
-            # using unseen data
-            test_accuracy = sess.run(self.accuracy_op, feed_dict=feed_dict)
-            print('Test Accuracy: {}'.format(test_accuracy))
+            try:
+                for step in range(epochs * train_size // self.batch_size):
+                    offset = (step * self.batch_size) % train_size
+                    train_example_batch = train_data[0][offset:(offset + self.batch_size)]
+                    train_label_batch = train_data[1][offset:(offset + self.batch_size)]
+
+                    feed_dict = {self.x_input: train_example_batch, self.y_input: train_label_batch}
+
+                    _, loss, accuracy, predicted, actual = sess.run([self.train_op, self.loss, self.accuracy_op,
+                                                                     self.predictions, self.y_onehot],
+                                                                     feed_dict=feed_dict)
+                    if step % 100 == 0 and step > 0:
+                        
+            except KeyboardInterrupt:
+                print('Training interrupted at step {}'.format(step))
+                os._exit(1)
+            finally:
+                print('EOF -- Training done at step {}'.format(step))
+
 
     @staticmethod
     def variable_summaries(var):
