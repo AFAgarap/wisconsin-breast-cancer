@@ -170,6 +170,8 @@ class LogisticRegression:
 
                         saver.save(sess, checkpoint_path + model_name, global_step=step)
 
+                    self.save_labels(predictions=predicted, actual=actual, result_path=result_path, step=step,
+                        phase='training')
             except KeyboardInterrupt:
                 print('Training interrupted at step {}'.format(step))
                 os._exit(1)
@@ -192,6 +194,11 @@ class LogisticRegression:
                         print('step [{}] testing -- loss : {}, accuracy : {}'.format(step, test_loss, test_accuracy))
                         
                         test_writer.add_summary(test_summary, step)
+
+                    print('EOF -- Testing done at step {}'.format(step))
+
+                    self.save_labels(predictions=predicted, actual=actual, result_path=result_path, step=step,
+                        phase='testing')
 
     @staticmethod
     def variable_summaries(var):
