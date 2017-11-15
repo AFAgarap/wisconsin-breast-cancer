@@ -23,7 +23,7 @@ from __future__ import print_function
 __version__ = '0.1.1'
 __author__ = 'Abien Fred Agarap'
 
-from gru_svm import GruSvm
+from models.gru_svm import GruSvm
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
