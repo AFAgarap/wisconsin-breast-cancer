@@ -275,8 +275,6 @@ class GruSvm:
 
                 print('EOF -- Testing done at step {}'.format(step))
 
-            saver.save(sess, checkpoint_path + model_name, global_step=step)
-
     @staticmethod
     def variable_summaries(var):
         with tf.name_scope('summaries'):
