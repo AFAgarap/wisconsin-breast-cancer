@@ -13,6 +13,7 @@
 # limitations under the License.
 # ==============================================================================
 
+"""Implementation of Logistic Regression"""
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
@@ -20,13 +21,16 @@ from __future__ import print_function
 __version__ = '0.1.0'
 __author__ = 'Abien Fred Agarap'
 
+import numpy as np
 import os
+import sys
 import tensorflow as tf
 import time
 
 
 class LogisticRegression:
     """Implementation of the Logistic Regression algorithm using TensorFlow"""
+
     def __init__(self, alpha, batch_size, num_classes, sequence_length):
         """Initialize the Logistic Regression class
 
@@ -57,8 +61,8 @@ class LogisticRegression:
 
                 # [BATCH_SIZE, NUM_CLASSES]
                 y_onehot = tf.one_hot(indices=y_input, depth=self.num_classes, on_value=1.0, off_value=-1.0,
-                                        name='y_onehot')
-            
+                                      name='y_onehot')
+
             with tf.name_scope('training_ops'):
                 with tf.name_scope('weights'):
                     weight = tf.Variable(tf.zeros([self.sequence_length, self.num_classes]), name='weights')
@@ -70,16 +74,16 @@ class LogisticRegression:
                     output = tf.matmul(x_input, weight) + bias
                     output = tf.identity(output, name='logits')
                     tf.summary.histogram('pre-activations', output)
-                        
+
             with tf.name_scope('cross_entropy_loss'):
                 cross_entropy = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=y_onehot, logits=output))
             tf.summary.scalar('loss', cross_entropy)
 
             # train using SGD algorithm
             train_op = tf.train.GradientDescentOptimizer(learning_rate=0.5).minimize(cross_entropy)
-            
+
             with tf.name_scope('accuracy'):
-                with tf.name_scope('correct_predition'):
+                with tf.name_scope('correct_prediction'):
                     # check if the actual labels and predicted labels match
                     correct = tf.equal(tf.argmax(output, 1), tf.argmax(y_onehot, 1))
                 with tf.name_scope('accuracy'):
@@ -160,7 +164,7 @@ class LogisticRegression:
 
                     summary, _, predicted, actual = sess.run([self.merged, self.train_op, self.loss, self.accuracy_op,
                                                               self.predictions, self.y_onehot],
-                                                              feed_dict=feed_dict)
+                                                             feed_dict=feed_dict)
                     if step % 100 == 0 and step > 0:
                         train_loss, train_accuracy = sess.run([self.loss, self.accuracy_op], feed_dict=feed_dict)
 
@@ -171,7 +175,7 @@ class LogisticRegression:
                         saver.save(sess, checkpoint_path + model_name, global_step=step)
 
                     self.save_labels(predictions=predicted, actual=actual, result_path=result_path, step=step,
-                        phase='training')
+                                     phase='training')
             except KeyboardInterrupt:
                 print('Training interrupted at step {}'.format(step))
                 os._exit(1)
@@ -188,17 +192,17 @@ class LogisticRegression:
                     test_summary, predicted, actual, test_loss, test_accuracy = sess.run([self.merged, self.predictions,
                                                                                           self.y_onehot, self.loss,
                                                                                           self.accuracy_op],
-                                                                                          feed_dict=feed_dict)
+                                                                                         feed_dict=feed_dict)
 
                     if step % 100 == 0 and step > 0:
                         print('step [{}] testing -- loss : {}, accuracy : {}'.format(step, test_loss, test_accuracy))
-                        
+
                         test_writer.add_summary(test_summary, step)
 
                     print('EOF -- Testing done at step {}'.format(step))
 
                     self.save_labels(predictions=predicted, actual=actual, result_path=result_path, step=step,
-                        phase='testing')
+                                     phase='testing')
 
     @staticmethod
     def variable_summaries(var):
