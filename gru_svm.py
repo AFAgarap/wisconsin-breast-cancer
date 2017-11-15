@@ -305,6 +305,9 @@ class GruSvm:
           The phase for which the predictions is, i.e. training/validation/testing.
         """
 
+        if not os.path.exists(path=result_path):
+            os.mkdir(result_path)
+
         # Concatenate the predicted and actual labels
         labels = np.concatenate((predictions, actual), axis=1)
 
