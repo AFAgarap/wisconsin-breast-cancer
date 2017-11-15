@@ -20,7 +20,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-__version__ = '0.1.0'
+__version__ = '0.1.1'
 __author__ = 'Abien Fred Agarap'
 
 from gru_svm import GruSvm
@@ -28,8 +28,8 @@ from sklearn import datasets
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 
-BATCH_SIZE = 100
-CELL_SIZE = 100
+BATCH_SIZE = 256
+CELL_SIZE = 256
 DROPOUT_RATE = 0.8
 LEARNING_RATE = 1e-3
 NUM_CLASSES = 2
