@@ -37,7 +37,7 @@ class LogisticRegression:
         Parameter
         ---------
         alpha : float
-          The learning rate for the GRU+Softmax model.
+          The learning rate for the Logistic Regression model.
         batch_size : int
           The number of batches to use for training/validation/testing.
         num_classes : int
