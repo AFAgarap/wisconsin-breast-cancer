@@ -80,7 +80,7 @@ class LogisticRegression:
             tf.summary.scalar('loss', cross_entropy)
 
             # train using SGD algorithm
-            train_op = tf.train.GradientDescentOptimizer(learning_rate=0.5).minimize(cross_entropy)
+            train_op = tf.train.GradientDescentOptimizer(learning_rate=alpha).minimize(cross_entropy)
 
             with tf.name_scope('accuracy'):
                 predictions = tf.nn.softmax(logits=output, name='softmax_predictions')
