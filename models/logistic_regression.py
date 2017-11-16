@@ -83,12 +83,13 @@ class LogisticRegression:
             train_op = tf.train.GradientDescentOptimizer(learning_rate=0.5).minimize(cross_entropy)
 
             with tf.name_scope('accuracy'):
+                predictions = tf.nn.softmax(logits=output, name='softmax_predictions')
                 with tf.name_scope('correct_prediction'):
                     # check if the actual labels and predicted labels match
                     correct = tf.equal(tf.argmax(output, 1), tf.argmax(y_onehot, 1))
                 with tf.name_scope('accuracy'):
                     # get the % of correct predictions
-                    accuracy_op = tf.reduce_mean(tf.cast(correct, tf.float32))
+                    accuracy = tf.reduce_mean(tf.cast(correct, tf.float32))
             tf.summary.scalar('accuracy', accuracy)
 
             merged = tf.summary.merge_all()
@@ -100,7 +101,7 @@ class LogisticRegression:
             self.predictions = predictions
             self.cross_entropy = cross_entropy
             self.train_op = train_op
-            self.accuracy_op = accuracy_op
+            self.accuracy_op = accuracy
             self.merged = merged
 
         sys.stdout.write('\n<log> Building graph...')
