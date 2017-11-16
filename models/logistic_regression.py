@@ -60,7 +60,7 @@ class LogisticRegression:
                 y_input = tf.placeholder(tf.uint8, [None], name='y_input')
 
                 # [BATCH_SIZE, NUM_CLASSES]
-                y_onehot = tf.one_hot(indices=y_input, depth=self.num_classes, on_value=1.0, off_value=-1.0,
+                y_onehot = tf.one_hot(indices=y_input, depth=self.num_classes, on_value=1.0, off_value=0.0,
                                       name='y_onehot')
 
             with tf.name_scope('training_ops'):
@@ -80,7 +80,7 @@ class LogisticRegression:
             tf.summary.scalar('loss', cross_entropy)
 
             # train using SGD algorithm
-            train_op = tf.train.AdamOptimizer(learning_rate=alpha).minimize(cross_entropy)
+            train_op = tf.train.GradientDescentOptimizer(learning_rate=alpha).minimize(cross_entropy)
 
             with tf.name_scope('accuracy'):
                 predictions = tf.nn.softmax(logits=output, name='softmax_predictions')
@@ -202,10 +202,10 @@ class LogisticRegression:
 
                         test_writer.add_summary(test_summary, step)
 
-                    print('EOF -- Testing done at step {}'.format(step))
-
                     self.save_labels(predictions=predicted, actual=actual, result_path=result_path, step=step,
                                      phase='testing')
+
+                print('EOF -- Testing done at step {}'.format(step))
 
     @staticmethod
     def variable_summaries(var):
