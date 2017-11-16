@@ -80,7 +80,7 @@ class LogisticRegression:
             tf.summary.scalar('loss', cross_entropy)
 
             # train using SGD algorithm
-            train_op = tf.train.GradientDescentOptimizer(learning_rate=alpha).minimize(cross_entropy)
+            train_op = tf.train.AdamOptimizer(learning_rate=alpha).minimize(cross_entropy)
 
             with tf.name_scope('accuracy'):
                 predictions = tf.nn.softmax(logits=output, name='softmax_predictions')
@@ -163,11 +163,12 @@ class LogisticRegression:
 
                     feed_dict = {self.x_input: train_example_batch, self.y_input: train_label_batch}
 
-                    summary, _, predicted, actual = sess.run([self.merged, self.train_op, self.loss, self.accuracy_op,
-                                                              self.predictions, self.y_onehot],
-                                                             feed_dict=feed_dict)
+                    summary, _, loss, predicted, actual = sess.run([self.merged, self.train_op, self.cross_entropy,
+                                                                    self.predictions, self.y_onehot],
+                                                                   feed_dict=feed_dict)
                     if step % 100 == 0 and step > 0:
-                        train_loss, train_accuracy = sess.run([self.loss, self.accuracy_op], feed_dict=feed_dict)
+                        train_loss, train_accuracy = sess.run([self.cross_entropy, self.accuracy_op],
+                                                              feed_dict=feed_dict)
 
                         print('step [{}] train -- loss : {}, accuracy : {}'.format(step, train_loss, train_accuracy))
 
@@ -191,7 +192,8 @@ class LogisticRegression:
                     feed_dict = {self.x_input: test_example_batch, self.y_input: test_label_batch}
 
                     test_summary, predicted, actual, test_loss, test_accuracy = sess.run([self.merged, self.predictions,
-                                                                                          self.y_onehot, self.loss,
+                                                                                          self.y_onehot,
+                                                                                          self.cross_entropy,
                                                                                           self.accuracy_op],
                                                                                          feed_dict=feed_dict)
 
@@ -239,4 +241,4 @@ class LogisticRegression:
         labels = np.concatenate((predictions, actual), axis=1)
 
         # save the labels array to NPY file
-        np.save(file=os.path.join(result_path, '{}-gru_svm-{}.npy'.format(phase, step)), arr=labels)
+        np.save(file=os.path.join(result_path, '{}-logistic_regression-{}.npy'.format(phase, step)), arr=labels)
