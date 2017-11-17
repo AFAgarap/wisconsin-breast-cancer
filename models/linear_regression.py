@@ -31,6 +31,7 @@ __author__ = 'Abien Fred Agarap'
 
 import numpy as np
 import os
+import time
 import tensorflow as tf
 import sys
 
@@ -136,25 +137,55 @@ class LinearRegression:
 
         init_op = tf.group(tf.global_variables_initializer(), tf.local_variables_initializer())
 
+        timestamp = str(time.asctime())
+
+        train_writer = tf.summary.FileWriter(os.path.join(log_path, timestamp + '-training'),
+                                             graph=tf.get_default_graph())
+        test_writer = tf.summary.FileWriter(os.path.join(log_path, timestamp + '-testing'),
+                                            graph=tf.get_default_graph())
+
         with tf.Session() as sess:
             sess.run(init_op)
 
-            for step in range(1000):
-                # load the data
-                x_train, y_train = self.data_input
-                
-                # create input dictionary to feed to the train operation
-                feed_dict = {self.x_input: x_train, self.y: y_train}
-                
-                # run the train operation with the previously-defined input dict
-                sess.run(self.train_op, feed_dict=feed_dict)
-                
-                # get the learnt parameters and the error (loss)
-                curr_w, curr_b, curr_loss = sess.run([self.weight, self.bias, self.loss], feed_dict=feed_dict)
-                
-            # print the learn parameters of the regression and its loss
-            print("W: {}, b: {}, loss: {}".format(curr_w, curr_b, curr_loss))
+            try:
+                for step in range(epochs * train_size // self.batch_size):
+                    offset = (step * self.batch_size) % train_size
+                    batch_train_data = train_data[0][offset : (offset + self.batch_size)]
+                    batch_train_labels = train_data[1][offset : (offset + self.batch_size)]
 
+                    feed_dict = {self.x_input: batch_train_data, self.y_input: batch_train_labels}
+
+                    summary, _, step_loss = sess.run([self.merged, self.train_op, self.loss], feed_dict=feed_dict)
+
+                    if step % 100 == 0:
+                        train_accuracy = sess.run(self.accuracy, feed_dict=feed_dict)
+                        print('step [{}] train -- loss : {}, accuracy : {}'.format(step, step_loss, train_accuracy))
+                        train_writer.add_summary(summary=summary, global_step=step)
+            except KeyboardInterrupt:
+                print('Training interrupted at step {}'.format(step))
+                os._exit(1)
+            finally:
+                print('EOF - training done at step {}'.format(step))
+
+                for step in range(epochs * validation_size // self.batch_size):
+                    offset = (step * self.batch_size) % validation_size
+                    test_example_batch = validation_data[0][offset:(offset + self.batch_size)]
+                    test_label_batch = validation_data[1][offset:(offset + self.batch_size)]
+
+                    feed_dict = {self.x_input: test_example_batch, self.y_input: test_label_batch}
+
+                    test_summary, predicted, actual = sess.run([self.merged, self.predicted_class, self.y_onehot],
+                                                               feed_dict=feed_dict)
+
+                    if step % 100 == 0 and step > 0:
+                        test_accuracy, test_loss = sess.run([self.accuracy, self.loss], feed_dict=feed_dict)
+
+                        print('step [{}] testing --- loss : {}, accuracy : {}'.format(step, test_loss, test_accuracy))
+
+                        test_writer.add_summary(summary=test_summary, global_step=step)
+
+                print('EOF -- testing done at step {}'.format(step))
+                
     @staticmethod
     def variable_summaries(var):
         with tf.name_scope('summaries'):
