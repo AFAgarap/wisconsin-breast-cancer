@@ -177,7 +177,7 @@ class GruSvm:
         if not os.path.exists(path=checkpoint_path):
             os.mkdir(path=checkpoint_path)
 
-        saver = tf.train.Saver(max_to_keep=1000)
+        saver = tf.train.Saver(max_to_keep=10)
 
         # initialize H (current_state) with values of zeros
         current_state = np.zeros([self.batch_size, self.cell_size])
