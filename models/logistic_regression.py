@@ -152,7 +152,7 @@ class LogisticRegression:
             checkpoint = tf.train.get_checkpoint_state(checkpoint_path)
 
             if checkpoint and checkpoint.model_checkpoint_path:
-                saver = tf.train.import_meta_graph(checkpoint.model_checkpoint_path)
+                saver = tf.train.import_meta_graph(checkpoint.model_checkpoint_path + '.meta')
                 saver.restore(sess, tf.train.latest_checkpoint(checkpoint_path))
 
             try:
