@@ -74,10 +74,9 @@ def main():
     model = GruSvm(alpha=LEARNING_RATE, batch_size=BATCH_SIZE, cell_size=CELL_SIZE, dropout_rate=DROPOUT_RATE,
                    num_classes=NUM_CLASSES, sequence_length=num_features, svm_c=SVM_C)
 
-    model.train(checkpoint_path='./checkpoint_path/', log_path='./log_path/', model_name='gru_svm', epochs=10000,
-                train_data=[train_features, train_labels], train_size=train_size,
-                validation_data=[test_features, test_labels],
-                validation_size=test_size, result_path='./results')
+    model.train(checkpoint_path='./checkpoint_path/gru_svm/', log_path='./log_path/gru_svm/', model_name='gru_svm',
+                epochs=1000, train_data=[train_features, train_labels], train_size=train_size,
+                validation_data=[test_features, test_labels], validation_size=test_size, result_path='./results')
 
 
 if __name__ == '__main__':
