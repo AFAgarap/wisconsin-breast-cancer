@@ -85,7 +85,7 @@ class LinearRegression:
 
             loss = tf.reduce_sum(tf.square(output - y_input))
 
-            train_op = tf.train.GradientDescentOptimizer(learning_rate=0.01).minimize(loss)
+            train_op = tf.train.GradientDescentOptimizer(learning_rate=alpha).minimize(loss)
 
             with tf.name_scope('accuracy'):
                 predicted_class = 1 if output >= 0.5 else 0
@@ -185,7 +185,7 @@ class LinearRegression:
                         test_writer.add_summary(summary=test_summary, global_step=step)
 
                 print('EOF -- testing done at step {}'.format(step))
-                
+
     @staticmethod
     def variable_summaries(var):
         with tf.name_scope('summaries'):
