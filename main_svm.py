@@ -21,10 +21,10 @@ __version__ = '0.1.5'
 __author__ = 'Abien Fred Agarap'
 
 import argparse
+from models import svm
 from sklearn import datasets
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
-import svm
 import utils
 
 BATCH_SIZE = 40
