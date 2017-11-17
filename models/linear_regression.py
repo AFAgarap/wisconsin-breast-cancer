@@ -29,6 +29,8 @@ from __future__ import print_function
 __version__ = '0.1.0'
 __author__ = 'Abien Fred Agarap'
 
+import numpy as np
+import os
 import tensorflow as tf
 import sys
 
@@ -137,3 +139,38 @@ class LinearRegression:
             # print the learn parameters of the regression and its loss
             print("W: {}, b: {}, loss: {}".format(curr_w, curr_b, curr_loss))
 
+    @staticmethod
+    def variable_summaries(var):
+        with tf.name_scope('summaries'):
+            mean = tf.reduce_mean(var)
+            tf.summary.scalar('mean', mean)
+            with tf.name_scope('stddev'):
+                stddev = tf.sqrt(tf.reduce_mean(tf.square(var - mean)))
+            tf.summary.scalar('stddev', stddev)
+            tf.summary.scalar('max', tf.reduce_max(var))
+            tf.summary.scalar('min', tf.reduce_min(var))
+            tf.summary.histogram('histogram', var)
+
+    @staticmethod
+    def save_labels(predictions, actual, result_path, step, phase):
+        """Saves the actual and predicted labels to a NPY file
+
+        Parameter
+        ---------
+        predictions : numpy.ndarray
+          The NumPy array containing the predicted labels.
+        actual : numpy.ndarray
+          The NumPy array containing the actual labels.
+        result_path : str
+          The path where to save the concatenated actual and predicted labels.
+        step : int
+          The time step for the NumPy arrays.
+        phase : str
+          The phase for which the predictions is, i.e. training/validation/testing.
+        """
+
+        # Concatenate the predicted and actual labels
+        labels = np.concatenate((predictions, actual), axis=1)
+
+        # save the labels array to NPY file
+        np.save(file=os.path.join(result_path, '{}-linear_regression-{}.npy'.format(phase, step)), arr=labels)
