@@ -313,3 +313,4 @@ class GruSvm:
 
         # save the labels array to NPY file
         np.save(file=os.path.join(result_path, '{}-gru_svm-{}.npy'.format(phase, step)), arr=labels)
+        
