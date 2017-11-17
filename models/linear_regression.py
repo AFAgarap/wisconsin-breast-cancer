@@ -73,16 +73,29 @@ class LinearRegression:
             with tf.name_scope('training_ops'):
                 with tf.name_scope('weights'):
                     weight = tf.Variable(tf.zeros([self.sequence_length, self.num_classes]), name='weight')
+                    self.variable_summaries(weight)
                 with tf.name_scope('biases'):
                     bias = tf.Variable(tf.zeros([self.num_classes]), name='bias')
+                    self.variable_summaries(bias)
                 with tf.name_scope('decision_function'):
                     output = tf.matmul(weight, x_input) + bias
                     output = tf.identity(output, name='output')
+                    tf.summary.histogram('output', output)
 
             loss = tf.reduce_sum(tf.square(output - y_input))
-            
-            # train the regression to reach optimal parameters W and b
+
             train_op = tf.train.GradientDescentOptimizer(learning_rate=0.01).minimize(loss)
+
+            with tf.name_scope('accuracy'):
+                predicted_class = 1 if output >= 0.5 else 0
+                predicted_class = tf.identity(predicted_class, name='prediction')
+                with tf.name_scope('correct_prediction'):
+                    correct = tf.equal(tf.argmax(predicted_class, 1), tf.argmax(y_onehot, 1))
+                with tf.name_scope('accuracy'):
+                    accuracy = tf.reduce_mean(tf.cast(correct, 'float'))
+            tf.summary.scalar('accuracy', accuracy)
+
+            merged = tf.summary.merge_all()
 
             self.weight = weight
             self.x_input = x_input
@@ -92,6 +105,9 @@ class LinearRegression:
             self.output = output
             self.loss = loss
             self.train_op = train_op
+            self.predicted_class = predicted_class
+            self.accuracy = accuracy
+            self.merged = merged
 
         sys.stdout.write('\n<log> Building graph...')
         __graph__()
