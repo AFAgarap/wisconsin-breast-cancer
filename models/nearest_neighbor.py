@@ -22,50 +22,57 @@ __version__ = '0.1.0'
 __author__ = 'Abien Fred Agarap'
 
 import numpy as np
-from sklearn import datasets
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
 import tensorflow as tf
 
-dataset = datasets.load_breast_cancer()
 
-features = dataset.data
-labels = dataset.target
+class NearestNeighbor:
 
-features = StandardScaler().fit_transform(features)
+    def __init__(self, train_features, train_labels, sequence_length):
+        self.train_features = train_features
+        self.train_labels = train_labels
 
-train_features, test_features, train_labels, test_labels = train_test_split(features, labels, test_size=0.2, stratify=labels)
-train_labels = tf.one_hot(train_labels, depth=2, on_value=1, off_value=0)
-test_labels = tf.one_hot(test_labels, depth=2, on_value=1, off_value=0)
+        with tf.name_scope('input'):
+            xtr = tf.placeholder(dtype=tf.float32, shape=[None, sequence_length])
+            xte = tf.placeholder(dtype=tf.float32, shape=[sequence_length])
 
-xtr = tf.placeholder("float", [None, 30])
-xte = tf.placeholder("float", [30])
+        distance = tf.sqrt(tf.reduce_sum(tf.square(xtr - xte), reduction_indices=1))
 
-distance = tf.sqrt(tf.reduce_sum(tf.square(xtr - xte), reduction_indices=1))
+        prediction = tf.arg_min(distance, 0)
 
-pred = tf.arg_min(distance, 0)
+        accuracy = 0.
 
-accuracy = 0.
+        self.xtr = xtr
+        self.xte = xte
+        self.distance = distance
+        self.prediction = prediction
+        self.accuracy = accuracy
 
-# Initialize the variables (i.e. assign their default value)
-init = tf.global_variables_initializer()
+    def predict(self, test_features, test_labels):
 
-# Start training
-with tf.Session() as sess:
+        train_labels = tf.one_hot(self.train_labels, depth=2, on_value=1, off_value=0)
+        test_labels = tf.one_hot(test_labels, depth=2, on_value=1, off_value=0)
 
-    # Run the initializer
-    sess.run(init)
+        init = tf.global_variables_initializer()
 
-    y_, y = sess.run([test_labels, train_labels])
+        # Start training
+        with tf.Session() as sess:
 
-    # loop over test data
-    for i in range(len(test_features)):
-        # Get nearest neighbor
-        nn_index = sess.run(pred, feed_dict={xtr: train_features, xte: test_features[i, :]})
-        # Get nearest neighbor class label and compare it to its true label
-        print("Test", i, "Prediction:", np.argmax(y[nn_index]), "True Class:", np.argmax(y_[i]))
-        # Calculate accuracy
-        if np.argmax(y[nn_index]) == np.argmax(y_[i]):
-            accuracy += 1./len(test_features)
-    print("Done!")
-print("Accuracy:", accuracy)
+            # Run the initializer
+            sess.run(init)
+
+            y_, y = sess.run([test_labels, train_labels])
+
+            # loop over test data
+            for index in range(len(test_features)):
+
+                feed_dict = {self.xtr: self.train_features, self.xte: test_features[index, :]}
+
+                nn_index = sess.run(self.prediction, feed_dict=feed_dict)
+
+                print('Test [{}] Actual Class: {}, Predicted Class : {}'.format(index, np.argmax(y_[index]),
+                                                                                np.argmax(y[nn_index])))
+
+                if np.argmax(y[nn_index]) == np.argmax(y_[index]):
+                    self.accuracy += 1. / len(test_features)
+
+        print('Accuracy : {}'.format(self.accuracy))
