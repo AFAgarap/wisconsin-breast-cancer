@@ -21,13 +21,13 @@ __version__ = '0.1.5'
 __author__ = 'Abien Fred Agarap'
 
 import argparse
-from models import svm
+from models.svm import SVM
 from sklearn import datasets
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 import utils
 
-BATCH_SIZE = 40
+BATCH_SIZE = 128
 LEARNING_RATE = 1e-3
 NUM_CLASSES = 2
 
@@ -49,7 +49,6 @@ def parse_args():
 
 
 def main(arguments):
-
     # load the features of the dataset
     features = datasets.load_breast_cancer().data
 
@@ -67,7 +66,7 @@ def main(arguments):
 
     # split the dataset to 70/30 partition: 70% train, 30% test
     train_features, test_features, train_labels, test_labels = train_test_split(features, labels,
-                                                                                test_size=0.20, stratify=labels)
+                                                                                test_size=0.3, stratify=labels)
 
     train_size = train_features.shape[0]
     test_size = test_features.shape[0]
@@ -79,8 +78,8 @@ def main(arguments):
     test_labels = test_labels[:test_size - (test_size % BATCH_SIZE)]
 
     # instantiate the SVM class
-    model = svm.SVM(alpha=LEARNING_RATE, batch_size=BATCH_SIZE, svm_c=arguments.svm_c, num_classes=NUM_CLASSES,
-                    num_features=num_features)
+    model = SVM(alpha=LEARNING_RATE, batch_size=BATCH_SIZE, svm_c=arguments.svm_c, num_classes=NUM_CLASSES,
+                num_features=num_features)
 
     # train the instantiated model
     model.train(epochs=arguments.num_epochs, log_path=arguments.log_path, train_data=[train_features, train_labels],
