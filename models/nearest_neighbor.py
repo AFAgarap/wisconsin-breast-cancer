@@ -28,6 +28,7 @@ __version__ = '0.1.0'
 __author__ = 'Abien Fred Agarap'
 
 import numpy as np
+import os
 import tensorflow as tf
 
 
@@ -57,7 +58,7 @@ class NearestNeighbor:
         self.prediction = prediction
         self.accuracy = accuracy
 
-    def predict(self, test_features, test_labels):
+    def predict(self, test_features, test_labels, result_path):
 
         train_labels = tf.one_hot(self.train_labels, depth=2, on_value=1, off_value=0)
         test_labels = tf.one_hot(test_labels, depth=2, on_value=1, off_value=0)
@@ -82,7 +83,37 @@ class NearestNeighbor:
                 print('Test [{}] Actual Class: {}, Predicted Class : {}'.format(index, np.argmax(y_[index]),
                                                                                 np.argmax(y[nn_index])))
 
+                self.save_labels(predictions=np.argmax(y[nn_index]), actual=np.argmax(y_[index]),
+                                 result_path=result_path, step=index, phase='testing')
+
                 if np.argmax(y[nn_index]) == np.argmax(y_[index]):
                     self.accuracy += 1. / len(test_features)
 
         print('Accuracy : {}'.format(self.accuracy))
+
+    @staticmethod
+    def save_labels(predictions, actual, result_path, step, phase):
+        """Saves the actual and predicted labels to a NPY file
+
+        Parameter
+        ---------
+        predictions : int
+          The predicted label.
+        actual : int
+          The actual label.
+        result_path : str
+          The path where to save the concatenated actual and predicted labels.
+        step : int
+          The time step for the predicted and actual labels
+        phase : str
+          The phase for which the prediction is, i.e. training/validation/testing.
+        """
+
+        if not os.path.exists(path=result_path):
+            os.mkdir(result_path)
+
+        # Concatenate the predicted and actual labels
+        labels = np.concatenate((predictions, actual), axis=1)
+
+        # save the labels array to NPY file
+        np.save(file=os.path.join(result_path, '{}-nearest_neighbor-{}.npy'.format(phase, step)), arr=labels)
