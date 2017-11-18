@@ -13,7 +13,13 @@
 # limitations under the License.
 # ==============================================================================
 
-"""An implementation of K-Nearest Neighbor"""
+"""An implementation of K-Nearest Neighbor based on [1]
+
+[1] Aymeric Damien. 2017, August 29. (2017, August 29).
+https://github.com/aymericdamien/TensorFlow-Examples/blob/master/examples/2_BasicModels/nearest_neighbor.py
+Accessed: November 17, 2017.
+
+"""
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
