@@ -56,7 +56,6 @@ class SVM:
             """Building the inference graph"""
 
             with tf.name_scope('input'):
-
                 # [BATCH_SIZE, NUM_FEATURES]
                 x_input = tf.placeholder(dtype=tf.float32, shape=[None, self.num_features], name='x_input')
 
@@ -83,10 +82,9 @@ class SVM:
                     tf.summary.histogram('pre-activations', output)
 
             with tf.name_scope('svm'):
-                regularization = 0.5 * tf.reduce_sum(tf.square(weight))
-                hinge_loss = tf.reduce_sum(
-                    tf.square(tf.maximum(tf.zeros([self.batch_size, self.num_classes]),
-                                         1 - tf.cast(y_onehot, tf.float32) * output)))
+                regularization = tf.reduce_mean(tf.square(weight))
+                hinge_loss = tf.reduce_mean(tf.square(tf.maximum(tf.zeros([self.batch_size, self.num_classes]),
+                                                                 1 - tf.cast(y_onehot, tf.float32) * output)))
                 with tf.name_scope('loss'):
                     loss = regularization + self.svm_c * hinge_loss
             tf.summary.scalar('loss', loss)
@@ -148,7 +146,8 @@ class SVM:
 
         # event files to contain the TensorBoard log
         train_writer = tf.summary.FileWriter(log_path + timestamp + '-training', graph=tf.get_default_graph())
-
+        test_writer = tf.summary.FileWriter(os.path.join(log_path, timestamp + '-testing'),
+                                            graph=tf.get_default_graph())
         with tf.Session() as sess:
             sess.run(init_op)
 
@@ -185,6 +184,7 @@ class SVM:
                     if step % 100 == 0 and step > 0:
                         print('step [{}] validation -- loss : {}, accuracy : {}'.format(step, validation_loss,
                                                                                         validation_accuracy))
+                        test_writer.add_summary(summary=validation_summary, global_step=step)
 
                     self.save_labels(predictions=predictions, actual=actual, result_path=result_path, step=step,
                                      phase='testing')
