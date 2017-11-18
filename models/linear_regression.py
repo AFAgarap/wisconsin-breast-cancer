@@ -79,16 +79,18 @@ class LinearRegression:
                     bias = tf.Variable(tf.zeros([self.num_classes]), name='bias')
                     self.variable_summaries(bias)
                 with tf.name_scope('decision_function'):
-                    output = tf.matmul(weight, x_input) + bias
+                    output = tf.matmul(x_input, weight) + bias
                     output = tf.identity(output, name='output')
                     tf.summary.histogram('output', output)
 
-            loss = tf.reduce_sum(tf.square(output - y_input))
+            with tf.name_scope('mean_squared_loss'):
+                loss = tf.reduce_mean(tf.square(output - y_onehot))
+            tf.summary.scalar('loss', loss)
 
             train_op = tf.train.GradientDescentOptimizer(learning_rate=alpha).minimize(loss)
 
             with tf.name_scope('accuracy'):
-                predicted_class = 1 if output >= 0.5 else 0
+                predicted_class = self.discretize(output)
                 predicted_class = tf.identity(predicted_class, name='prediction')
                 with tf.name_scope('correct_prediction'):
                     correct = tf.equal(tf.argmax(predicted_class, 1), tf.argmax(y_onehot, 1))
@@ -98,9 +100,7 @@ class LinearRegression:
 
             merged = tf.summary.merge_all()
 
-            self.weight = weight
             self.x_input = x_input
-            self.bias = bias
             self.y_input = y_input
             self.y_onehot = y_onehot
             self.output = output
@@ -171,7 +171,7 @@ class LinearRegression:
                 print('Training interrupted at step {}'.format(step))
                 os._exit(1)
             finally:
-                print('EOF - training done at step {}'.format(step))
+                print('EOF -- training done at step {}'.format(step))
 
                 for step in range(epochs * validation_size // self.batch_size):
                     offset = (step * self.batch_size) % validation_size
@@ -233,3 +233,22 @@ class LinearRegression:
 
         # save the labels array to NPY file
         np.save(file=os.path.join(result_path, '{}-linear_regression-{}.npy'.format(phase, step)), arr=labels)
+
+    @staticmethod
+    def discretize(output):
+        """Discretizes the predicted classes to [0, 1]
+
+        Parameter
+        ---------
+        output : numpy.ndarray
+          The NumPy array containing the predicted classes
+
+        Returns
+        -------
+        output : numpy.ndarray
+          The discretized predicted classes.
+        """
+
+        output = output >= 0.5
+        output = tf.cast(output, 'float')
+        return output
