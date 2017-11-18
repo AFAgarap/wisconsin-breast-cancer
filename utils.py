@@ -18,7 +18,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-__version__ = '0.1.0'
+__version__ = '0.2.0'
 __author__ = 'Abien Fred Agarap'
 
 import matplotlib.pyplot as plt
@@ -132,3 +132,23 @@ def plot_confusion_matrix(phase, path, class_names):
     # return the confusion matrix and the accuracy
     return conf, accuracy
 
+
+def get_statistical_measures(conf_matrix):
+    """Returns an array of statistical measures
+
+    Parameter
+    ---------
+    conf_matrix : array
+      The confusion matrix
+
+    Returns
+    -------
+    statistical_measures : numpy.ndarray
+      The NumPy array containing the statistical measures
+    """
+    true_positive_rate = conf_matrix[1][1] / (conf_matrix[1][1] + conf_matrix[1][0])
+    true_negative_rate = conf_matrix[0][0] / (conf_matrix[0][0] + conf_matrix[0][1])
+    false_positive_rate = 1 - true_negative_rate
+    false_negative_rate = 1 - true_positive_rate
+    statistical_measures = np.array([true_negative_rate, true_positive_rate, false_negative_rate, false_positive_rate])
+    return statistical_measures
