@@ -150,17 +150,23 @@ class LinearRegression:
             try:
                 for step in range(epochs * train_size // self.batch_size):
                     offset = (step * self.batch_size) % train_size
-                    batch_train_data = train_data[0][offset : (offset + self.batch_size)]
-                    batch_train_labels = train_data[1][offset : (offset + self.batch_size)]
+                    batch_train_data = train_data[0][offset:(offset + self.batch_size)]
+                    batch_train_labels = train_data[1][offset:(offset + self.batch_size)]
 
                     feed_dict = {self.x_input: batch_train_data, self.y_input: batch_train_labels}
 
-                    summary, _, step_loss = sess.run([self.merged, self.train_op, self.loss], feed_dict=feed_dict)
+                    summary, _, step_loss, predicted, actual = sess.run([self.merged, self.train_op, self.loss,
+                                                                         self.predicted_class, self.y_onehot],
+                                                                        feed_dict=feed_dict)
 
                     if step % 100 == 0:
                         train_accuracy = sess.run(self.accuracy, feed_dict=feed_dict)
                         print('step [{}] train -- loss : {}, accuracy : {}'.format(step, step_loss, train_accuracy))
                         train_writer.add_summary(summary=summary, global_step=step)
+
+                    self.save_labels(predictions=predicted, actual=actual, result_path=result_path, step=step,
+                                     phase='training')
+
             except KeyboardInterrupt:
                 print('Training interrupted at step {}'.format(step))
                 os._exit(1)
@@ -183,6 +189,9 @@ class LinearRegression:
                         print('step [{}] testing --- loss : {}, accuracy : {}'.format(step, test_loss, test_accuracy))
 
                         test_writer.add_summary(summary=test_summary, global_step=step)
+
+                    self.save_labels(predictions=predicted, actual=actual, result_path=result_path, step=step,
+                                     phase='testing')
 
                 print('EOF -- testing done at step {}'.format(step))
 
