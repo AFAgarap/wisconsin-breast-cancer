@@ -66,9 +66,9 @@ def main():
     model = LinearRegression(alpha=LEARNING_RATE, batch_size=BATCH_SIZE, num_classes=NUM_CLASSES,
                              sequence_length=num_features)
 
-    model.train(epochs=2500, log_path='./log_path/linear_regression', train_data=[train_features, train_labels],
+    model.train(epochs=2500, log_path='./log_path/linear_regression/', train_data=[train_features, train_labels],
                 train_size=train_size, validation_data=[test_features, test_labels], validation_size=test_size,
-                result_path='./results/linear_regression')
+                result_path='./results/linear_regression/')
 
 
 if __name__ == '__main__':
