@@ -42,7 +42,7 @@ def main():
 
     model = NearestNeighbor(train_features, train_labels, num_features)
 
-    model.predict(test_features, test_labels)
+    model.predict(test_features, test_labels, result_path='./results/nearest_neighbor/')
 
 
 if __name__ == '__main__':
