@@ -20,12 +20,12 @@ from __future__ import print_function
 __version__ = '0.1.0'
 __author__ = 'Abien Fred Agarap'
 
-from models.logistic_regression import LogisticRegression
+from models.linear_regression import LinearRegression
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 
-BATCH_SIZE = 100
+BATCH_SIZE = 128
 LEARNING_RATE = 1e-3
 NUM_CLASSES = 2
 
@@ -41,7 +41,7 @@ def main():
 
     labels = dataset.target
 
-    train_features, test_features, train_labels, test_labels = train_test_split(features, labels, test_size=0.2,
+    train_features, test_features, train_labels, test_labels = train_test_split(features, labels, test_size=0.3,
                                                                                 stratify=labels)
 
     train_size = train_features.shape[0]
@@ -63,13 +63,12 @@ def main():
 
     test_size = test_features.shape[0]
 
-    model = LogisticRegression(alpha=LEARNING_RATE, batch_size=BATCH_SIZE, num_classes=NUM_CLASSES,
-                               sequence_length=num_features)
+    model = LinearRegression(alpha=LEARNING_RATE, batch_size=BATCH_SIZE, num_classes=NUM_CLASSES,
+                             sequence_length=num_features)
 
-    model.train(checkpoint_path='./checkpoint_path/linear_regression/', log_path='./log_path/',
-                model_name='linear_regression', epochs=2500, train_data=[train_features, train_labels],
+    model.train(epochs=2500, log_path='./log_path/linear_regression', train_data=[train_features, train_labels],
                 train_size=train_size, validation_data=[test_features, test_labels], validation_size=test_size,
-                result_path='./results')
+                result_path='./results/linear_regression')
 
 
 if __name__ == '__main__':
