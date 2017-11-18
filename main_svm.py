@@ -91,8 +91,8 @@ def main(arguments):
 
     print('True negatives : {}'.format(test_conf[0][0]))
     print('False negatives : {}'.format(test_conf[1][0]))
-    print('True positives : {}'.format(test_conf[0][1]))
-    print('False positives : {}'.format(test_conf[1][1]))
+    print('True positives : {}'.format(test_conf[1][1]))
+    print('False positives : {}'.format(test_conf[0][1]))
     print('Testing accuracy : {}'.format(test_accuracy))
 
 
