@@ -37,7 +37,7 @@ def main():
 
     features = StandardScaler().fit_transform(features)
 
-    train_features, test_features, train_labels, test_labels = train_test_split(features, labels, test_size=0.2,
+    train_features, test_features, train_labels, test_labels = train_test_split(features, labels, test_size=0.3,
                                                                                 stratify=labels)
 
     model = NearestNeighbor(train_features, train_labels, num_features)
