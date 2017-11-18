@@ -110,7 +110,7 @@ class GruSvm:
             # L2-SVM
             with tf.name_scope('svm'):
                 regularization_loss = 0.5 * tf.reduce_sum(tf.square(weight))
-                hinge_loss = tf.reduce_sum(
+                hinge_loss = tf.reduce_mean(
                     tf.square(tf.maximum(tf.zeros([self.batch_size, self.num_classes]), 1 - y_onehot * output)))
                 with tf.name_scope('loss'):
                     loss = regularization_loss + self.svm_c * hinge_loss
