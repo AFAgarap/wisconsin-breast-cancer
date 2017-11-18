@@ -22,12 +22,12 @@ __version__ = '0.1'
 __author__ = 'Abien Fred Agarap'
 
 import argparse
-import MLP
+from models.MLP import MLP
 from sklearn import datasets
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 
-BATCH_SIZE = 200
+BATCH_SIZE = 128
 LEARNING_RATE = 1e-2
 NUM_CLASSES = 2
 NUM_NODES = [500, 500, 500]
@@ -48,7 +48,6 @@ def parse_args():
 
 
 def main(arguments):
-
     # load the features of the dataset
     features = datasets.load_breast_cancer().data
 
@@ -61,11 +60,11 @@ def main(arguments):
     # load the labels for the features
     labels = datasets.load_breast_cancer().target
 
-    train_features, test_features, train_labels, test_labels = train_test_split(features, labels, test_size=0.20,
+    train_features, test_features, train_labels, test_labels = train_test_split(features, labels, test_size=0.30,
                                                                                 stratify=labels)
 
-    model = MLP.MLP(alpha=LEARNING_RATE, batch_size=BATCH_SIZE, node_size=NUM_NODES, num_classes=NUM_CLASSES,
-                    num_features=num_features)
+    model = MLP(alpha=LEARNING_RATE, batch_size=BATCH_SIZE, node_size=NUM_NODES, num_classes=NUM_CLASSES,
+                num_features=num_features)
 
     model.train(num_epochs=arguments.num_epochs, log_path=arguments.log_path, train_data=[train_features, train_labels],
                 train_size=train_features.shape[0], test_data=[test_features, test_labels],
