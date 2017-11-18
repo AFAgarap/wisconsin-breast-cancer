@@ -113,7 +113,7 @@ class NearestNeighbor:
             os.mkdir(result_path)
 
         # Concatenate the predicted and actual labels
-        labels = np.concatenate((predictions, actual), axis=1)
+        labels = np.array([predictions, actual])
 
         # save the labels array to NPY file
         np.save(file=os.path.join(result_path, '{}-nearest_neighbor-{}.npy'.format(phase, step)), arr=labels)
