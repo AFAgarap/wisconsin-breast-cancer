@@ -41,6 +41,10 @@ class NearestNeighbor:
             xtr = tf.placeholder(dtype=tf.float32, shape=[None, sequence_length])
             xte = tf.placeholder(dtype=tf.float32, shape=[sequence_length])
 
+        # L1-Norm
+        # distance = tf.reduce_sum(tf.abs(tf.add(xtr, tf.negative(xte))), reduction_indices=1)
+
+        # L2-Norm
         distance = tf.sqrt(tf.reduce_sum(tf.square(xtr - xte), reduction_indices=1))
 
         prediction = tf.arg_min(distance, 0)
