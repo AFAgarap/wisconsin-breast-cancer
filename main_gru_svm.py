@@ -28,12 +28,12 @@ from sklearn import datasets
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 
-BATCH_SIZE = 256
-CELL_SIZE = 256
-DROPOUT_RATE = 0.8
+BATCH_SIZE = 128
+CELL_SIZE = 128
+DROPOUT_RATE = 0.5
 LEARNING_RATE = 1e-3
 NUM_CLASSES = 2
-SVM_C = 1
+SVM_C = 5
 
 
 def main():
@@ -49,7 +49,7 @@ def main():
 
     labels[labels == 0] = -1
 
-    train_features, test_features, train_labels, test_labels = train_test_split(features, labels, test_size=0.2,
+    train_features, test_features, train_labels, test_labels = train_test_split(features, labels, test_size=0.3,
                                                                                 stratify=labels)
 
     train_size = train_features.shape[0]
@@ -75,7 +75,7 @@ def main():
                    num_classes=NUM_CLASSES, sequence_length=num_features, svm_c=SVM_C)
 
     model.train(checkpoint_path='./checkpoint_path/gru_svm/', log_path='./log_path/gru_svm/', model_name='gru_svm',
-                epochs=1000, train_data=[train_features, train_labels], train_size=train_size,
+                epochs=3000, train_data=[train_features, train_labels], train_size=train_size,
                 validation_data=[test_features, test_labels], validation_size=test_size, result_path='./results')
 
 
