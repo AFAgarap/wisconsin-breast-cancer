@@ -21,13 +21,10 @@ with the findings of the related studies[<a href="https://www.ijcit.com/archives
 ## Machine Learning (ML) Algorithms
 
 * <a href="https://github.com/AFAgarap/wisconsin-breast-cancer/blob/master/main_gru_svm.py">GRU-SVM</a>
-* <a href="https://github.com/AFAgarap/wisconsin-breast-cancer/blob/master/main_linear_regression.py">Linear Regression
-</a>
+* <a href="https://github.com/AFAgarap/wisconsin-breast-cancer/blob/master/main_linear_regression.py">Linear Regression</a>
 * <a href="https://github.com/AFAgarap/wisconsin-breast-cancer/blob/master/main_mlp.py">Multilayer Perceptron</a>
-* <a href="https://github.com/AFAgarap/wisconsin-breast-cancer/blob/master/main_nearest_neighbor.py">Nearest
-Neighbor</a>
-* <a href="https://github.com/AFAgarap/wisconsin-breast-cancer/blob/master/main_logistic_regression.py">Softmax
-Regression</a>
+* <a href="https://github.com/AFAgarap/wisconsin-breast-cancer/blob/master/main_nearest_neighbor.py">Nearest Neighbor</a>
+* <a href="https://github.com/AFAgarap/wisconsin-breast-cancer/blob/master/main_logistic_regression.py">Softmax Regression</a>
 * <a href="https://github.com/AFAgarap/wisconsin-breast-cancer/blob/master/main_svm.py">L2-SVM</a> 
 
 ## License
