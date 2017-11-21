@@ -1,4 +1,4 @@
-Using Machine Learning Algorithms for the Detection of Breast Cancer using the Wisconsin Diagnostic Dataset
+On Breast Cancer Detection: An Application of Machine Learning Algorithms on the Wisconsin Diagnostic Dataset
 ===
 
 [![Hex.pm](https://img.shields.io/hexpm/l/plug.svg)]()
