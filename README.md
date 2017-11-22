@@ -1,6 +1,7 @@
 On Breast Cancer Detection: An Application of Machine Learning Algorithms on the Wisconsin Diagnostic Dataset
 ===
 
+![](https://img.shields.io/badge/DOI-cs.LG%2F1711.07831-blue.svg)
 [![Hex.pm](https://img.shields.io/hexpm/l/plug.svg)]()
 [![PyPI](https://img.shields.io/pypi/pyversions/Django.svg)]()
 
