@@ -5,6 +5,8 @@ On Breast Cancer Detection: An Application of Machine Learning Algorithms on the
 [![Hex.pm](https://img.shields.io/hexpm/l/plug.svg)]()
 [![PyPI](https://img.shields.io/pypi/pyversions/Django.svg)]()
 
+The full paper on this project may be read at [arXiv.org](http://arxiv.org/abs/1711.07831), [ResearchGate](https://www.researchgate.net/publication/321161452_On_Breast_Cancer_Detection_An_Application_of_Machine_Learning_Algorithms_on_the_Wisconsin_Diagnostic_Dataset), and [Academia.edu](https://www.academia.edu/35227156/On_Breast_Cancer_Detection_An_Application_of_Machine_Learning_Algorithms_on_the_Wisconsin_Diagnostic_Dataset).
+
 ## Abstract
 This paper presents a comparison of six machine learning (ML) algorithms: <a href="https://github.com/AFAgarap/gru-svm">
 GRU-SVM</a><a href="http://arxiv.org/abs/1709.03082">[4]</a>, Linear Regression, Multilayer Perceptron (MLP),
