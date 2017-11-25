@@ -2,7 +2,7 @@ On Breast Cancer Detection: An Application of Machine Learning Algorithms on the
 ===
 
 ![](https://img.shields.io/badge/DOI-cs.LG%2F1711.07831-blue.svg)
-[![Hex.pm](https://img.shields.io/hexpm/l/plug.svg)]()
+![](https://img.shields.io/badge/license-Apache--2.0-blue.svg)
 [![PyPI](https://img.shields.io/pypi/pyversions/Django.svg)]()
 
 The full paper on this project may be read at [arXiv.org](http://arxiv.org/abs/1711.07831), [ResearchGate](https://www.researchgate.net/publication/321161452_On_Breast_Cancer_Detection_An_Application_of_Machine_Learning_Algorithms_on_the_Wisconsin_Diagnostic_Dataset), and [Academia.edu](https://www.academia.edu/35227156/On_Breast_Cancer_Detection_An_Application_of_Machine_Learning_Algorithms_on_the_Wisconsin_Diagnostic_Dataset).
@@ -20,6 +20,16 @@ presented ML algorithms performed well (all exceeded 90% test accuracy) on the c
 stands out among the implemented algorithms with a test accuracy of ~99.04% Lastly, the results are comparable
 with the findings of the related studies[<a href="https://www.ijcit.com/archives/volume1/issue1/Paper010105.pdf">18</a>
 , <a href="https://link.springer.com/chapter/10.1007%2F0-387-34224-9_58?LI=true">23</a>].
+
+## Citation
+```
+@article{agarap2017breast,
+  title={On Breast Cancer Detection: An Application of Machine Learning Algorithms on the Wisconsin Diagnostic Dataset},
+  author={Agarap, Abien Fred},
+  journal={arXiv preprint arXiv:1711.07831},
+  year={2017}
+}
+```
 
 ## Machine Learning (ML) Algorithms
 
