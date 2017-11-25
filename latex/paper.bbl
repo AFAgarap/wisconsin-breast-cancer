@@ -1,0 +1,345 @@
+%%% -*-BibTeX-*-
+%%% Do NOT edit. File created by BibTeX with style
+%%% ACM-Reference-Format-Journals [18-Jan-2012].
+
+\begin{thebibliography}{23}
+
+%%% ====================================================================
+%%% NOTE TO THE USER: you can override these defaults by providing
+%%% customized versions of any of these macros before the \bibliography
+%%% command.  Each of them MUST provide its own final punctuation,
+%%% except for \shownote{}, \showDOI{}, and \showURL{}.  The latter two
+%%% do not use final punctuation, in order to avoid confusing it with
+%%% the Web address.
+%%%
+%%% To suppress output of a particular field, define its macro to expand
+%%% to an empty string, or better, \unskip, like this:
+%%%
+%%% \newcommand{\showDOI}[1]{\unskip}   % LaTeX syntax
+%%%
+%%% \def \showDOI #1{\unskip}           % plain TeX syntax
+%%%
+%%% ====================================================================
+
+\ifx \showCODEN    \undefined \def \showCODEN     #1{\unskip}     \fi
+\ifx \showDOI      \undefined \def \showDOI       #1{#1}\fi
+\ifx \showISBNx    \undefined \def \showISBNx     #1{\unskip}     \fi
+\ifx \showISBNxiii \undefined \def \showISBNxiii  #1{\unskip}     \fi
+\ifx \showISSN     \undefined \def \showISSN      #1{\unskip}     \fi
+\ifx \showLCCN     \undefined \def \showLCCN      #1{\unskip}     \fi
+\ifx \shownote     \undefined \def \shownote      #1{#1}          \fi
+\ifx \showarticletitle \undefined \def \showarticletitle #1{#1}   \fi
+\ifx \showURL      \undefined \def \showURL       {\relax}        \fi
+% The following commands are used for tagged output and should be
+% invisible to TeX
+\providecommand\bibfield[2]{#2}
+\providecommand\bibinfo[2]{#2}
+\providecommand\natexlab[1]{#1}
+\providecommand\showeprint[2][]{arXiv:#2}
+
+\bibitem[\protect\citeauthoryear{??}{sur}{[n. d.]}]%
+        {surveillance}
+ \bibinfo{year}{[n. d.]}\natexlab{}.
+\newblock   (\bibinfo{year}{[n. d.]}).
+\newblock
+\showURL{%
+\url{https://seer.cancer.gov/statfacts/html/breast.html}}
+
+
+\bibitem[\protect\citeauthoryear{??}{nci}{2017}]%
+        {nci2017}
+ \bibinfo{year}{2017}\natexlab{}.
+\newblock \bibinfo{title}{Cancer Statistics}.
+\newblock   (\bibinfo{date}{Mar} \bibinfo{year}{2017}).
+\newblock
+\showURL{%
+\url{https://www.cancer.gov/about-cancer/understanding/statistics}}
+
+
+\bibitem[\protect\citeauthoryear{Abadi, Agarwal, Barham, Brevdo, Chen, Citro,
+  Corrado, Davis, Dean, Devin, Ghemawat, Goodfellow, Harp, Irving, Isard, Jia,
+  Jozefowicz, Kaiser, Kudlur, Levenberg, Man\'{e}, Monga, Moore, Murray, Olah,
+  Schuster, Shlens, Steiner, Sutskever, Talwar, Tucker, Vanhoucke, Vasudevan,
+  Vi\'{e}gas, Vinyals, Warden, Wattenberg, Wicke, Yu, and Zheng}{Abadi
+  et~al\mbox{.}}{2015}]%
+        {tensorflow2015-whitepaper}
+\bibfield{author}{\bibinfo{person}{Mart\'{\i}n Abadi}, \bibinfo{person}{Ashish
+  Agarwal}, \bibinfo{person}{Paul Barham}, \bibinfo{person}{Eugene Brevdo},
+  \bibinfo{person}{Zhifeng Chen}, \bibinfo{person}{Craig Citro},
+  \bibinfo{person}{Greg~S. Corrado}, \bibinfo{person}{Andy Davis},
+  \bibinfo{person}{Jeffrey Dean}, \bibinfo{person}{Matthieu Devin},
+  \bibinfo{person}{Sanjay Ghemawat}, \bibinfo{person}{Ian Goodfellow},
+  \bibinfo{person}{Andrew Harp}, \bibinfo{person}{Geoffrey Irving},
+  \bibinfo{person}{Michael Isard}, \bibinfo{person}{Yangqing Jia},
+  \bibinfo{person}{Rafal Jozefowicz}, \bibinfo{person}{Lukasz Kaiser},
+  \bibinfo{person}{Manjunath Kudlur}, \bibinfo{person}{Josh Levenberg},
+  \bibinfo{person}{Dan Man\'{e}}, \bibinfo{person}{Rajat Monga},
+  \bibinfo{person}{Sherry Moore}, \bibinfo{person}{Derek Murray},
+  \bibinfo{person}{Chris Olah}, \bibinfo{person}{Mike Schuster},
+  \bibinfo{person}{Jonathon Shlens}, \bibinfo{person}{Benoit Steiner},
+  \bibinfo{person}{Ilya Sutskever}, \bibinfo{person}{Kunal Talwar},
+  \bibinfo{person}{Paul Tucker}, \bibinfo{person}{Vincent Vanhoucke},
+  \bibinfo{person}{Vijay Vasudevan}, \bibinfo{person}{Fernanda Vi\'{e}gas},
+  \bibinfo{person}{Oriol Vinyals}, \bibinfo{person}{Pete Warden},
+  \bibinfo{person}{Martin Wattenberg}, \bibinfo{person}{Martin Wicke},
+  \bibinfo{person}{Yuan Yu}, {and} \bibinfo{person}{Xiaoqiang Zheng}.}
+  \bibinfo{year}{2015}\natexlab{}.
+\newblock \bibinfo{title}{{TensorFlow}: Large-Scale Machine Learning on
+  Heterogeneous Systems}.
+\newblock   (\bibinfo{year}{2015}).
+\newblock
+\showURL{%
+\url{http://tensorflow.org/}}
+\newblock
+\shownote{Software available from tensorflow.org.}
+
+
+\bibitem[\protect\citeauthoryear{Agarap}{Agarap}{2017}]%
+        {agarap2017neural}
+\bibfield{author}{\bibinfo{person}{Abien~Fred Agarap}.}
+  \bibinfo{year}{2017}\natexlab{}.
+\newblock \showarticletitle{A Neural Network Architecture Combining Gated
+  Recurrent Unit (GRU) and Support Vector Machine (SVM) for Intrusion Detection
+  in Network Traffic Data}.
+\newblock \bibinfo{journal}{{\em arXiv preprint arXiv:1709.03082\/}}
+  (\bibinfo{year}{2017}).
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Alalshekmubarak and Smith}{Alalshekmubarak and
+  Smith}{2013}]%
+        {alalshekmubarak2013novel}
+\bibfield{author}{\bibinfo{person}{Abdulrahman Alalshekmubarak} {and}
+  \bibinfo{person}{Leslie~S Smith}.} \bibinfo{year}{2013}\natexlab{}.
+\newblock \showarticletitle{A novel approach combining recurrent neural network
+  and support vector machines for time series classification}. In
+  \bibinfo{booktitle}{{\em Innovations in Information Technology (IIT), 2013
+  9th International Conference on}}. IEEE, \bibinfo{pages}{42--47}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Bengio, Goodfellow, and Courville}{Bengio
+  et~al\mbox{.}}{2015}]%
+        {bengio2015deep}
+\bibfield{author}{\bibinfo{person}{Yoshua Bengio}, \bibinfo{person}{Ian~J
+  Goodfellow}, {and} \bibinfo{person}{Aaron Courville}.}
+  \bibinfo{year}{2015}\natexlab{}.
+\newblock \showarticletitle{Deep learning}.
+\newblock \bibinfo{journal}{{\em Nature\/}}  \bibinfo{volume}{521}
+  (\bibinfo{year}{2015}), \bibinfo{pages}{436--444}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Bishop}{Bishop}{1995}]%
+        {bishop1995neural}
+\bibfield{author}{\bibinfo{person}{Christopher~M Bishop}.}
+  \bibinfo{year}{1995}\natexlab{}.
+\newblock \bibinfo{booktitle}{{\em Neural networks for pattern recognition}}.
+\newblock \bibinfo{publisher}{Oxford university press}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Cho, Van~Merri{\"e}nboer, Gulcehre, Bahdanau,
+  Bougares, Schwenk, and Bengio}{Cho et~al\mbox{.}}{2014}]%
+        {Cho}
+\bibfield{author}{\bibinfo{person}{Kyunghyun Cho}, \bibinfo{person}{Bart
+  Van~Merri{\"e}nboer}, \bibinfo{person}{Caglar Gulcehre},
+  \bibinfo{person}{Dzmitry Bahdanau}, \bibinfo{person}{Fethi Bougares},
+  \bibinfo{person}{Holger Schwenk}, {and} \bibinfo{person}{Yoshua Bengio}.}
+  \bibinfo{year}{2014}\natexlab{}.
+\newblock \showarticletitle{Learning phrase representations using RNN
+  encoder-decoder for statistical machine translation}.
+\newblock \bibinfo{journal}{{\em arXiv preprint arXiv:1406.1078\/}}
+  (\bibinfo{year}{2014}).
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Cortes and Vapnik}{Cortes and Vapnik}{1995}]%
+        {Cortes}
+\bibfield{author}{\bibinfo{person}{C. Cortes} {and} \bibinfo{person}{V.
+  Vapnik}.} \bibinfo{year}{1995}\natexlab{}.
+\newblock \showarticletitle{Support-vector Networks}.
+\newblock \bibinfo{journal}{{\em Machine Learning\/}}  \bibinfo{volume}{20.3}
+  (\bibinfo{year}{1995}), \bibinfo{pages}{273--297}.
+\newblock
+\showDOI{%
+\url{https://doi.org/10.1007/BF00994018}}
+
+
+\bibitem[\protect\citeauthoryear{Damien}{Damien}{t 29}]%
+        {aymericdamien}
+\bibfield{author}{\bibinfo{person}{Aymeric Damien}.} \bibinfo{year}{2017,
+  August 29}\natexlab{}.
+\newblock   (\bibinfo{year}{2017, August 29}).
+\newblock
+\showURL{%
+\url{https://github.com/aymericdamien/TensorFlow-Examples/blob/master/examples/2_BasicModels/nearest_neighbor.py}}
+\newblock
+\shownote{Accessed: November 17, 2017.}
+
+
+\bibitem[\protect\citeauthoryear{Hahnloser, Sarpeshkar, Mahowald, Douglas, and
+  Seung}{Hahnloser et~al\mbox{.}}{2000}]%
+        {hahnloser2000digital}
+\bibfield{author}{\bibinfo{person}{Richard~HR Hahnloser},
+  \bibinfo{person}{Rahul Sarpeshkar}, \bibinfo{person}{Misha~A Mahowald},
+  \bibinfo{person}{Rodney~J Douglas}, {and} \bibinfo{person}{H~Sebastian
+  Seung}.} \bibinfo{year}{2000}\natexlab{}.
+\newblock \showarticletitle{Digital selection and analogue amplification
+  coexist in a cortex-inspired silicon circuit}.
+\newblock \bibinfo{journal}{{\em Nature\/}} \bibinfo{volume}{405},
+  \bibinfo{number}{6789} (\bibinfo{year}{2000}), \bibinfo{pages}{947--951}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Hunter}{Hunter}{2007}]%
+        {Hunter:2007}
+\bibfield{author}{\bibinfo{person}{J.~D. Hunter}.}
+  \bibinfo{year}{2007}\natexlab{}.
+\newblock \showarticletitle{Matplotlib: A 2D graphics environment}.
+\newblock \bibinfo{journal}{{\em Computing In Science \& Engineering\/}}
+  \bibinfo{volume}{9}, \bibinfo{number}{3} (\bibinfo{year}{2007}),
+  \bibinfo{pages}{90--95}.
+\newblock
+\showDOI{%
+\url{https://doi.org/10.1109/MCSE.2007.55}}
+
+
+\bibitem[\protect\citeauthoryear{Kingma and Ba}{Kingma and Ba}{2014}]%
+        {Kingma}
+\bibfield{author}{\bibinfo{person}{Diederik Kingma} {and}
+  \bibinfo{person}{Jimmy Ba}.} \bibinfo{year}{2014}\natexlab{}.
+\newblock \showarticletitle{Adam: A method for stochastic optimization}.
+\newblock \bibinfo{journal}{{\em arXiv preprint arXiv:1412.6980\/}}
+  (\bibinfo{year}{2014}).
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{McCulloch and Pitts}{McCulloch and
+  Pitts}{1943}]%
+        {mcculloch1943logical}
+\bibfield{author}{\bibinfo{person}{Warren~S McCulloch} {and}
+  \bibinfo{person}{Walter Pitts}.} \bibinfo{year}{1943}\natexlab{}.
+\newblock \showarticletitle{A logical calculus of the ideas immanent in nervous
+  activity}.
+\newblock \bibinfo{journal}{{\em The bulletin of mathematical biophysics\/}}
+  \bibinfo{volume}{5}, \bibinfo{number}{4} (\bibinfo{year}{1943}),
+  \bibinfo{pages}{115--133}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Pedregosa, Varoquaux, Gramfort, Michel,
+  Thirion, Grisel, Blondel, Prettenhofer, Weiss, Dubourg, Vanderplas, Passos,
+  Cournapeau, Brucher, Perrot, and Duchesnay}{Pedregosa et~al\mbox{.}}{2011}]%
+        {scikit-learn}
+\bibfield{author}{\bibinfo{person}{F. Pedregosa}, \bibinfo{person}{G.
+  Varoquaux}, \bibinfo{person}{A. Gramfort}, \bibinfo{person}{V. Michel},
+  \bibinfo{person}{B. Thirion}, \bibinfo{person}{O. Grisel},
+  \bibinfo{person}{M. Blondel}, \bibinfo{person}{P. Prettenhofer},
+  \bibinfo{person}{R. Weiss}, \bibinfo{person}{V. Dubourg}, \bibinfo{person}{J.
+  Vanderplas}, \bibinfo{person}{A. Passos}, \bibinfo{person}{D. Cournapeau},
+  \bibinfo{person}{M. Brucher}, \bibinfo{person}{M. Perrot}, {and}
+  \bibinfo{person}{E. Duchesnay}.} \bibinfo{year}{2011}\natexlab{}.
+\newblock \showarticletitle{Scikit-learn: Machine Learning in {P}ython}.
+\newblock \bibinfo{journal}{{\em Journal of Machine Learning Research\/}}
+  \bibinfo{volume}{12} (\bibinfo{year}{2011}), \bibinfo{pages}{2825--2830}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Quinlan}{Quinlan}{1993}]%
+        {quinlan1993c4}
+\bibfield{author}{\bibinfo{person}{J~Ross Quinlan}.}
+  \bibinfo{year}{1993}\natexlab{}.
+\newblock \showarticletitle{C4. 5: Programming for machine learning}.
+\newblock \bibinfo{journal}{{\em Morgan Kauffmann\/}}  \bibinfo{volume}{38}
+  (\bibinfo{year}{1993}).
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Rosenblatt}{Rosenblatt}{1958}]%
+        {rosenblatt1958perceptron}
+\bibfield{author}{\bibinfo{person}{Frank Rosenblatt}.}
+  \bibinfo{year}{1958}\natexlab{}.
+\newblock \showarticletitle{The perceptron: A probabilistic model for
+  information storage and organization in the brain.}
+\newblock \bibinfo{journal}{{\em Psychological review\/}} \bibinfo{volume}{65},
+  \bibinfo{number}{6} (\bibinfo{year}{1958}), \bibinfo{pages}{386}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Salama, Abdelhalim, and Zeid}{Salama
+  et~al\mbox{.}}{2012}]%
+        {salama2012breast}
+\bibfield{author}{\bibinfo{person}{Gouda~I Salama}, \bibinfo{person}{M
+  Abdelhalim}, {and} \bibinfo{person}{Magdy Abd-elghany Zeid}.}
+  \bibinfo{year}{2012}\natexlab{}.
+\newblock \showarticletitle{Breast cancer diagnosis on three different datasets
+  using multi-classifiers}.
+\newblock \bibinfo{journal}{{\em Breast Cancer (WDBC)\/}} \bibinfo{volume}{32},
+  \bibinfo{number}{569} (\bibinfo{year}{2012}), \bibinfo{pages}{2}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Tang}{Tang}{2013}]%
+        {Tang}
+\bibfield{author}{\bibinfo{person}{Yichuan Tang}.}
+  \bibinfo{year}{2013}\natexlab{}.
+\newblock \showarticletitle{Deep learning using linear support vector
+  machines}.
+\newblock \bibinfo{journal}{{\em arXiv preprint arXiv:1306.0239\/}}
+  (\bibinfo{year}{2013}).
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Walt, Colbert, and Varoquaux}{Walt
+  et~al\mbox{.}}{2011}]%
+        {walt2011numpy}
+\bibfield{author}{\bibinfo{person}{St{\'e}fan van~der Walt},
+  \bibinfo{person}{S~Chris Colbert}, {and} \bibinfo{person}{Gael Varoquaux}.}
+  \bibinfo{year}{2011}\natexlab{}.
+\newblock \showarticletitle{The NumPy array: a structure for efficient
+  numerical computation}.
+\newblock \bibinfo{journal}{{\em Computing in Science \& Engineering\/}}
+  \bibinfo{volume}{13}, \bibinfo{number}{2} (\bibinfo{year}{2011}),
+  \bibinfo{pages}{22--30}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Witten, Frank, Hall, and Pal}{Witten
+  et~al\mbox{.}}{2016}]%
+        {witten2016data}
+\bibfield{author}{\bibinfo{person}{Ian~H Witten}, \bibinfo{person}{Eibe Frank},
+  \bibinfo{person}{Mark~A Hall}, {and} \bibinfo{person}{Christopher~J Pal}.}
+  \bibinfo{year}{2016}\natexlab{}.
+\newblock \bibinfo{booktitle}{{\em Data Mining: Practical machine learning
+  tools and techniques}}.
+\newblock \bibinfo{publisher}{Morgan Kaufmann}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Wolberg, Street, and Mangasarian}{Wolberg
+  et~al\mbox{.}}{1992}]%
+        {wolberg1992breast}
+\bibfield{author}{\bibinfo{person}{William~H Wolberg}, \bibinfo{person}{W~Nick
+  Street}, {and} \bibinfo{person}{Olvi~L Mangasarian}.}
+  \bibinfo{year}{1992}\natexlab{}.
+\newblock \showarticletitle{Breast cancer Wisconsin (diagnostic) data set}.
+\newblock \bibinfo{journal}{{\em UCI Machine Learning Repository
+  [http://archive. ics. uci. edu/ml/]\/}} (\bibinfo{year}{1992}).
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Zafiropoulos, Maglogiannis, and
+  Anagnostopoulos}{Zafiropoulos et~al\mbox{.}}{2006}]%
+        {zafiropoulos2006support}
+\bibfield{author}{\bibinfo{person}{Elias Zafiropoulos}, \bibinfo{person}{Ilias
+  Maglogiannis}, {and} \bibinfo{person}{Ioannis Anagnostopoulos}.}
+  \bibinfo{year}{2006}\natexlab{}.
+\newblock \showarticletitle{A support vector machine approach to breast cancer
+  diagnosis and prognosis}.
+\newblock \bibinfo{journal}{{\em Artificial Intelligence Applications and
+  Innovations\/}} (\bibinfo{year}{2006}), \bibinfo{pages}{500--507}.
+\newblock
+
+
+\end{thebibliography}
