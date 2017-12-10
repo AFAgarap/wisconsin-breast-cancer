@@ -2,6 +2,7 @@ On Breast Cancer Detection: An Application of Machine Learning Algorithms on the
 ===
 
 ![](https://img.shields.io/badge/DOI-cs.LG%2F1711.07831-blue.svg)
+[![DOI](https://zenodo.org/badge/103154598.svg)](https://zenodo.org/badge/latestdoi/103154598)
 ![](https://img.shields.io/badge/license-Apache--2.0-blue.svg)
 [![PyPI](https://img.shields.io/pypi/pyversions/Django.svg)]()
 
