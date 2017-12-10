@@ -23,12 +23,25 @@ with the findings of the related studies[<a href="https://www.ijcit.com/archives
 , <a href="https://link.springer.com/chapter/10.1007%2F0-387-34224-9_58?LI=true">23</a>].
 
 ## Citation
+To cite the paper, kindly use the following BibTex entry:
 ```
 @article{agarap2017breast,
   title={On Breast Cancer Detection: An Application of Machine Learning Algorithms on the Wisconsin Diagnostic Dataset},
   author={Agarap, Abien Fred},
   journal={arXiv preprint arXiv:1711.07831},
   year={2017}
+}
+```
+
+To cite the repository/software, kindly use the following BibTex entry:
+```
+@misc{abien_fred_agarap_2017_1098533,
+  author       = {Abien Fred Agarap},
+  title        = {AFAgarap/wisconsin-breast-cancer: v0.1.0-alpha},
+  month        = dec,
+  year         = 2017,
+  doi          = {10.5281/zenodo.1098533},
+  url          = {https://doi.org/10.5281/zenodo.1098533}
 }
 ```
 
