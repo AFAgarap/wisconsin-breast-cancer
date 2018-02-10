@@ -6,6 +6,8 @@ On Breast Cancer Detection: An Application of Machine Learning Algorithms on the
 ![](https://img.shields.io/badge/license-Apache--2.0-blue.svg)
 [![PyPI](https://img.shields.io/pypi/pyversions/Django.svg)]()
 
+*This paper was presented at the 2nd International Conference on Machine Learning and Soft Computing (ICMLSC) in Phu Quoc Island, Vietnam last February 2-4, 2018.*
+
 The full paper on this project may be read at [arXiv.org](http://arxiv.org/abs/1711.07831), [ResearchGate](https://www.researchgate.net/publication/321161452_On_Breast_Cancer_Detection_An_Application_of_Machine_Learning_Algorithms_on_the_Wisconsin_Diagnostic_Dataset), and [Academia.edu](https://www.academia.edu/35227156/On_Breast_Cancer_Detection_An_Application_of_Machine_Learning_Algorithms_on_the_Wisconsin_Diagnostic_Dataset).
 
 ## Abstract
