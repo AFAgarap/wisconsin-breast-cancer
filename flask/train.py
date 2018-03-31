@@ -39,38 +39,78 @@ def parse_args():
 
 def main(args):
 
+    # get the dataset filename from parse_args()
     dataset = args.dataset
 
+    # names for the dataset features
     column_names = ['Sample code number', 'Clump Thickness', 'Uniformity of Cell Size',
             'Uniformity of Cell Shape', 'Marginal Adhesion', 'Single Epithelial Cell Size',
             'Bare Nuclei', 'Bland Chromatin', 'Normal Nucleoli',
             'Mitoses', 'Class']
 
+    # load the dataset
     data = pd.read_csv(dataset, names=column_names, delimiter=',')
+    
+    # replace missing data with NaN
     data = data.replace('?', np.NaN)
+
+    # replace NaN data with 0
     data = data.fillna(0)
+
+    # get the dataset features
     features = np.array(data.iloc[:, 0:10], np.int)
+    
+    # get the feature labels
     labels = np.array(data.iloc[:, 10], np.int)
+    
+    # convert the benign label to 0
     labels[labels == 2] = 0
+    
+    # convert the malignant label to 1
     labels[labels == 4] = 1
 
+    # split the dataset into 70/30 for training and testing dataset
     x_train, x_test, y_train, y_test = train_test_split(features, labels, test_size=0.30, stratify=labels)
 
+    # standardize using StandardScaler
     scaler = StandardScaler()
+    
+    # fit the scaler to train features
     scaler.fit(x_train)
+
+    # standardize the features
     x_train = scaler.transform(x_train)
     x_test = scaler.transform(x_test)
 
+    # define the keras DNN model
     model = Sequential()
+
+    # accept input with shape of features, use ReLU
     model.add(Dense(512, input_dim=features.shape[1], activation='relu'))
+    
+    # add two hidden layers with ReLU
     model.add(Dense(512, activation='relu'))
     model.add(Dense(512, activation='relu'))
+
+    # add dropout layer
     model.add(Dropout(0.25))
+
+    # binary classifier using sigmoid
     model.add(Dense(1, activation='sigmoid'))
+
+    # binary cross-entropy as loss function, and adam as optimizer
     model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
+    
+    # train the model by 32 epochs
     model.fit(x_train, y_train, epochs=32, verbose=1)
+    
+    # evaluate the trained model
     accuracy = model.evaluate(x_test, y_test)[1]
+
+    # display evaluation accuracy
     print('Test accuracy : {}'.format(accuracy))
+
+    # save the trained model
     model.save('dnn.h5')
 
 if __name__ == '__main__':
