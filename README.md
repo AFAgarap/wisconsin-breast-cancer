@@ -27,11 +27,22 @@ with the findings of the related studies[<a href="https://www.ijcit.com/archives
 ## Citation
 To cite the paper, kindly use the following BibTex entry:
 ```
-@article{agarap2017breast,
-  title={On Breast Cancer Detection: An Application of Machine Learning Algorithms on the Wisconsin Diagnostic Dataset},
-  author={Agarap, Abien Fred},
-  journal={arXiv preprint arXiv:1711.07831},
-  year={2017}
+@inproceedings{Agarap:2018:BCD:3184066.3184080,
+ author = {Agarap, Abien Fred M.},
+ title = {On Breast Cancer Detection: An Application of Machine Learning Algorithms on the Wisconsin Diagnostic Dataset},
+ booktitle = {Proceedings of the 2Nd International Conference on Machine Learning and Soft Computing},
+ series = {ICMLSC '18},
+ year = {2018},
+ isbn = {978-1-4503-6336-5},
+ location = {Phu Quoc Island, Viet Nam},
+ pages = {5--9},
+ numpages = {5},
+ url = {http://doi.acm.org/10.1145/3184066.3184080},
+ doi = {10.1145/3184066.3184080},
+ acmid = {3184080},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ keywords = {artificial intelligence, artificial neural networks, classification, linear regression, machine learning, multilayer perceptron, nearest neighbors, softmax regression, supervised learning, support vector machine, wisconsin diagnostic breast cancer dataset},
 }
 ```
 
