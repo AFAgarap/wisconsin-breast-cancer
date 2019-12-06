@@ -18,8 +18,8 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-__version__ = '0.2.0'
-__author__ = 'Abien Fred Agarap'
+__version__ = "0.2.0"
+__author__ = "Abien Fred Agarap"
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -84,11 +84,15 @@ def plot_confusion_matrix(phase, path, class_names):
         labels = np.append(labels, labels_batch)
 
         if (files.index(file) / files.__len__()) % 0.2 == 0:
-            print('Done appending {}% of {}'.format((files.index(file) / files.__len__()) * 100, files.__len__()))
+            print(
+                "Done appending {}% of {}".format(
+                    (files.index(file) / files.__len__()) * 100, files.__len__()
+                )
+            )
 
     labels = np.reshape(labels, newshape=(labels.shape[0] // 4, 4))
 
-    print('Done appending NPY files.')
+    print("Done appending NPY files.")
 
     # get the predicted labels
     predictions = labels[:, :2]
@@ -107,10 +111,10 @@ def plot_confusion_matrix(phase, path, class_names):
     conf = confusion_matrix(y_true=actual, y_pred=predictions)
 
     # create a confusion matrix plot
-    plt.imshow(conf, cmap=plt.cm.Purples, interpolation='nearest')
+    plt.imshow(conf, cmap=plt.cm.Purples, interpolation="nearest")
 
     # set the plot title
-    plt.title('Confusion Matrix for {} Phase'.format(phase))
+    plt.title("Confusion Matrix for {} Phase".format(phase))
 
     # legend of intensity for the plot
     plt.colorbar()
@@ -120,8 +124,8 @@ def plot_confusion_matrix(phase, path, class_names):
     plt.yticks(tick_marks, class_names)
 
     plt.tight_layout()
-    plt.ylabel('Actual label')
-    plt.xlabel('Predicted label')
+    plt.ylabel("Actual label")
+    plt.xlabel("Predicted label")
 
     # show the plot
     plt.show()
@@ -150,5 +154,12 @@ def get_statistical_measures(conf_matrix):
     true_negative_rate = conf_matrix[0][0] / (conf_matrix[0][0] + conf_matrix[0][1])
     false_positive_rate = 1 - true_negative_rate
     false_negative_rate = 1 - true_positive_rate
-    statistical_measures = np.array([true_negative_rate, true_positive_rate, false_negative_rate, false_positive_rate])
+    statistical_measures = np.array(
+        [
+            true_negative_rate,
+            true_positive_rate,
+            false_negative_rate,
+            false_positive_rate,
+        ]
+    )
     return statistical_measures

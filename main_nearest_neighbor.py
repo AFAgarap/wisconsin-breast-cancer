@@ -18,8 +18,8 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-__version__ = '0.1.0'
-__author__ = 'Abien Fred Agarap'
+__version__ = "0.1.0"
+__author__ = "Abien Fred Agarap"
 
 from models.nearest_neighbor import NearestNeighbor
 from sklearn import datasets
@@ -37,13 +37,14 @@ def main():
 
     features = StandardScaler().fit_transform(features)
 
-    train_features, test_features, train_labels, test_labels = train_test_split(features, labels, test_size=0.3,
-                                                                                stratify=labels)
+    train_features, test_features, train_labels, test_labels = train_test_split(
+        features, labels, test_size=0.3, stratify=labels
+    )
 
     model = NearestNeighbor(train_features, train_labels, num_features)
 
-    model.predict(test_features, test_labels, result_path='./results/nearest_neighbor/')
+    model.predict(test_features, test_labels, result_path="./results/nearest_neighbor/")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

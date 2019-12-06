@@ -17,8 +17,8 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-__version__ = '0.1.5'
-__author__ = 'Abien Fred Agarap'
+__version__ = "0.1.5"
+__author__ = "Abien Fred Agarap"
 
 import argparse
 from models.svm import SVM
@@ -34,16 +34,29 @@ NUM_CLASSES = 2
 
 def parse_args():
     parser = argparse.ArgumentParser(
-        description='SVM built using TensorFlow, for Wisconsin Breast Cancer Diagnostic Dataset')
-    group = parser.add_argument_group('Arguments')
-    group.add_argument('-c', '--svm_c', required=True, type=int,
-                       help='Penalty parameter C of the SVM')
-    group.add_argument('-n', '--num_epochs', required=True, type=int,
-                       help='number of epochs')
-    group.add_argument('-l', '--log_path', required=True, type=str,
-                       help='path where to save the TensorBoard logs')
-    group.add_argument('-r', '--result_path', required=True, type=str,
-                       help='path where to save the NumPy array consisting of the actual and predicted labels')
+        description="SVM built using TensorFlow, for Wisconsin Breast Cancer Diagnostic Dataset"
+    )
+    group = parser.add_argument_group("Arguments")
+    group.add_argument(
+        "-c", "--svm_c", required=True, type=int, help="Penalty parameter C of the SVM"
+    )
+    group.add_argument(
+        "-n", "--num_epochs", required=True, type=int, help="number of epochs"
+    )
+    group.add_argument(
+        "-l",
+        "--log_path",
+        required=True,
+        type=str,
+        help="path where to save the TensorBoard logs",
+    )
+    group.add_argument(
+        "-r",
+        "--result_path",
+        required=True,
+        type=str,
+        help="path where to save the NumPy array consisting of the actual and predicted labels",
+    )
     arguments = parser.parse_args()
     return arguments
 
@@ -65,38 +78,51 @@ def main(arguments):
     labels[labels == 0] = -1
 
     # split the dataset to 70/30 partition: 70% train, 30% test
-    train_features, test_features, train_labels, test_labels = train_test_split(features, labels,
-                                                                                test_size=0.3, stratify=labels)
+    train_features, test_features, train_labels, test_labels = train_test_split(
+        features, labels, test_size=0.3, stratify=labels
+    )
 
     train_size = train_features.shape[0]
     test_size = test_features.shape[0]
 
     # slice the dataset as per the batch size
-    train_features = train_features[:train_size - (train_size % BATCH_SIZE)]
-    train_labels = train_labels[:train_size - (train_size % BATCH_SIZE)]
-    test_features = test_features[:test_size - (test_size % BATCH_SIZE)]
-    test_labels = test_labels[:test_size - (test_size % BATCH_SIZE)]
+    train_features = train_features[: train_size - (train_size % BATCH_SIZE)]
+    train_labels = train_labels[: train_size - (train_size % BATCH_SIZE)]
+    test_features = test_features[: test_size - (test_size % BATCH_SIZE)]
+    test_labels = test_labels[: test_size - (test_size % BATCH_SIZE)]
 
     # instantiate the SVM class
-    model = SVM(alpha=LEARNING_RATE, batch_size=BATCH_SIZE, svm_c=arguments.svm_c, num_classes=NUM_CLASSES,
-                num_features=num_features)
+    model = SVM(
+        alpha=LEARNING_RATE,
+        batch_size=BATCH_SIZE,
+        svm_c=arguments.svm_c,
+        num_classes=NUM_CLASSES,
+        num_features=num_features,
+    )
 
     # train the instantiated model
-    model.train(epochs=arguments.num_epochs, log_path=arguments.log_path, train_data=[train_features, train_labels],
-                train_size=train_features.shape[0], validation_data=[test_features, test_labels],
-                validation_size=test_features.shape[0], result_path=arguments.result_path)
+    model.train(
+        epochs=arguments.num_epochs,
+        log_path=arguments.log_path,
+        train_data=[train_features, train_labels],
+        train_size=train_features.shape[0],
+        validation_data=[test_features, test_labels],
+        validation_size=test_features.shape[0],
+        result_path=arguments.result_path,
+    )
 
-    test_conf, test_accuracy = utils.plot_confusion_matrix(phase='testing', path=arguments.result_path,
-                                                           class_names=['benign', 'malignant'])
+    test_conf, test_accuracy = utils.plot_confusion_matrix(
+        phase="testing", path=arguments.result_path, class_names=["benign", "malignant"]
+    )
 
-    print('True negatives : {}'.format(test_conf[0][0]))
-    print('False negatives : {}'.format(test_conf[1][0]))
-    print('True positives : {}'.format(test_conf[1][1]))
-    print('False positives : {}'.format(test_conf[0][1]))
-    print('Testing accuracy : {}'.format(test_accuracy))
+    print("True negatives : {}".format(test_conf[0][0]))
+    print("False negatives : {}".format(test_conf[1][0]))
+    print("True positives : {}".format(test_conf[1][1]))
+    print("False positives : {}".format(test_conf[0][1]))
+    print("Testing accuracy : {}".format(test_accuracy))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     args = parse_args()
 
     main(args)

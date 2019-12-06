@@ -18,8 +18,8 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-__version__ = '0.1'
-__author__ = 'Abien Fred Agarap'
+__version__ = "0.1"
+__author__ = "Abien Fred Agarap"
 
 import argparse
 from models.MLP import MLP
@@ -35,14 +35,26 @@ NUM_NODES = [500, 500, 500]
 
 def parse_args():
     parser = argparse.ArgumentParser(
-        description='MLP written using TensorFlow, for Wisconsin Breast Cancer Diagnostic Dataset')
-    group = parser.add_argument_group('Arguments')
-    group.add_argument('-n', '--num_epochs', required=True, type=int,
-                       help='number of epochs')
-    group.add_argument('-l', '--log_path', required=True, type=str,
-                       help='path where to save the TensorBoard logs')
-    group.add_argument('-r', '--result_path', required=True, type=str,
-                       help='path where to save actual and predicted labels array')
+        description="MLP written using TensorFlow, for Wisconsin Breast Cancer Diagnostic Dataset"
+    )
+    group = parser.add_argument_group("Arguments")
+    group.add_argument(
+        "-n", "--num_epochs", required=True, type=int, help="number of epochs"
+    )
+    group.add_argument(
+        "-l",
+        "--log_path",
+        required=True,
+        type=str,
+        help="path where to save the TensorBoard logs",
+    )
+    group.add_argument(
+        "-r",
+        "--result_path",
+        required=True,
+        type=str,
+        help="path where to save actual and predicted labels array",
+    )
     arguments = parser.parse_args()
     return arguments
 
@@ -60,18 +72,30 @@ def main(arguments):
     # load the labels for the features
     labels = datasets.load_breast_cancer().target
 
-    train_features, test_features, train_labels, test_labels = train_test_split(features, labels, test_size=0.30,
-                                                                                stratify=labels)
+    train_features, test_features, train_labels, test_labels = train_test_split(
+        features, labels, test_size=0.30, stratify=labels
+    )
 
-    model = MLP(alpha=LEARNING_RATE, batch_size=BATCH_SIZE, node_size=NUM_NODES, num_classes=NUM_CLASSES,
-                num_features=num_features)
+    model = MLP(
+        alpha=LEARNING_RATE,
+        batch_size=BATCH_SIZE,
+        node_size=NUM_NODES,
+        num_classes=NUM_CLASSES,
+        num_features=num_features,
+    )
 
-    model.train(num_epochs=arguments.num_epochs, log_path=arguments.log_path, train_data=[train_features, train_labels],
-                train_size=train_features.shape[0], test_data=[test_features, test_labels],
-                test_size=test_features.shape[0], result_path=arguments.result_path)
+    model.train(
+        num_epochs=arguments.num_epochs,
+        log_path=arguments.log_path,
+        train_data=[train_features, train_labels],
+        train_size=train_features.shape[0],
+        test_data=[test_features, test_labels],
+        test_size=test_features.shape[0],
+        result_path=arguments.result_path,
+    )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     args = parse_args()
 
     main(args)

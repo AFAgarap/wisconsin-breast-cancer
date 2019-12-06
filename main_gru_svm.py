@@ -20,8 +20,8 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-__version__ = '0.1.1'
-__author__ = 'Abien Fred Agarap'
+__version__ = "0.1.1"
+__author__ = "Abien Fred Agarap"
 
 from models.gru_svm import GruSvm
 from sklearn import datasets
@@ -49,8 +49,9 @@ def main():
 
     labels[labels == 0] = -1
 
-    train_features, test_features, train_labels, test_labels = train_test_split(features, labels, test_size=0.3,
-                                                                                stratify=labels)
+    train_features, test_features, train_labels, test_labels = train_test_split(
+        features, labels, test_size=0.3, stratify=labels
+    )
 
     train_size = train_features.shape[0]
     test_size = test_features.shape[0]
@@ -59,25 +60,40 @@ def main():
     # e.g. train_size = 1898322, batch_size = 256
     # [:1898322-(1898322%256)] = [:1898240]
     # 1898322 // 256 = 7415; 7415 * 256 = 1898240
-    train_features = train_features[:train_size - (train_size % BATCH_SIZE)]
-    train_labels = train_labels[:train_size - (train_size % BATCH_SIZE)]
+    train_features = train_features[: train_size - (train_size % BATCH_SIZE)]
+    train_labels = train_labels[: train_size - (train_size % BATCH_SIZE)]
 
     # modify the size of the dataset to be passed on model.train()
     train_size = train_features.shape[0]
 
     # slice the dataset to be exact as per the batch size
-    test_features = test_features[:test_size - (test_size % BATCH_SIZE)]
-    test_labels = test_labels[:test_size - (test_size % BATCH_SIZE)]
+    test_features = test_features[: test_size - (test_size % BATCH_SIZE)]
+    test_labels = test_labels[: test_size - (test_size % BATCH_SIZE)]
 
     test_size = test_features.shape[0]
 
-    model = GruSvm(alpha=LEARNING_RATE, batch_size=BATCH_SIZE, cell_size=CELL_SIZE, dropout_rate=DROPOUT_RATE,
-                   num_classes=NUM_CLASSES, sequence_length=num_features, svm_c=SVM_C)
+    model = GruSvm(
+        alpha=LEARNING_RATE,
+        batch_size=BATCH_SIZE,
+        cell_size=CELL_SIZE,
+        dropout_rate=DROPOUT_RATE,
+        num_classes=NUM_CLASSES,
+        sequence_length=num_features,
+        svm_c=SVM_C,
+    )
 
-    model.train(checkpoint_path='./checkpoint_path/gru_svm/', log_path='./log_path/gru_svm/', model_name='gru_svm',
-                epochs=3000, train_data=[train_features, train_labels], train_size=train_size,
-                validation_data=[test_features, test_labels], validation_size=test_size, result_path='./results')
+    model.train(
+        checkpoint_path="./checkpoint_path/gru_svm/",
+        log_path="./log_path/gru_svm/",
+        model_name="gru_svm",
+        epochs=3000,
+        train_data=[train_features, train_labels],
+        train_size=train_size,
+        validation_data=[test_features, test_labels],
+        validation_size=test_size,
+        result_path="./results",
+    )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
