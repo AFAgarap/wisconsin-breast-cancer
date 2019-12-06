@@ -8,7 +8,7 @@ On Breast Cancer Detection: An Application of Machine Learning Algorithms on the
 
 *This paper was presented at the 2nd International Conference on Machine Learning and Soft Computing (ICMLSC) in Phu Quoc Island, Vietnam last February 2-4, 2018.*
 
-The full paper on this project may be read at [arXiv.org](http://arxiv.org/abs/1711.07831), [ResearchGate](https://www.researchgate.net/publication/321161452_On_Breast_Cancer_Detection_An_Application_of_Machine_Learning_Algorithms_on_the_Wisconsin_Diagnostic_Dataset), [Academia.edu](https://www.academia.edu/35227156/On_Breast_Cancer_Detection_An_Application_of_Machine_Learning_Algorithms_on_the_Wisconsin_Diagnostic_Dataset), and [ACM Digital Library](https://dl.acm.org/citation.cfm?doid=3184066.3184080).
+The full paper on this project may be read at [arXiv.org](http://arxiv.org/abs/1711.07831).
 
 ## Abstract
 This paper presents a comparison of six machine learning (ML) algorithms: <a href="https://github.com/AFAgarap/gru-svm">
