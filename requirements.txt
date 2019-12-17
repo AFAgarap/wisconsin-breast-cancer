@@ -1,5 +1,5 @@
 matplotlib==2.1.0
-tensorflow_gpu==1.4.0
+tensorflow_gpu==1.15.0
 numpy==1.13.3
 scikit_learn==0.19.1
 tensorflow==1.15.0
