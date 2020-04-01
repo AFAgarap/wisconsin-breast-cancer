@@ -65,7 +65,7 @@ To cite the repository/software, kindly use the following BibTex entry:
 * <a href="https://github.com/AFAgarap/wisconsin-breast-cancer/blob/master/main_mlp.py">Multilayer Perceptron</a>
 * <a href="https://github.com/AFAgarap/wisconsin-breast-cancer/blob/master/main_nearest_neighbor.py">Nearest Neighbor</a>
 * <a href="https://github.com/AFAgarap/wisconsin-breast-cancer/blob/master/main_logistic_regression.py">Softmax Regression</a>
-* <a href="https://github.com/AFAgarap/wisconsin-breast-cancer/blob/master/main_svm.py">L2-SVM</a> 
+* <a href="https://github.com/AFAgarap/wisconsin-breast-cancer/blob/master/main_svm.py">L2-SVM</a>
 
 ## Results
 All experiments in this study were conducted on a laptop computer with Intel Core(TM) i5-6300HQ CPU @ 2.30GHz x 4,
@@ -73,7 +73,7 @@ All experiments in this study were conducted on a laptop computer with Intel Cor
 
 ![](results/training_accuracy.png)
 
-**Figure 1. Training accuracy of the machine learning algorithms on breast cancer detection using WDBC.** 
+**Figure 1. Training accuracy of the machine learning algorithms on breast cancer detection using WDBC.**
 
 Figure 1 shows the training accuracy of the ML algorithms: (1) GRU-SVM finished its training in 2 minutes and 54
 seconds with an average training accuracy of 90.6857639%, (2) Linear Regression finished its training in 35 seconds
