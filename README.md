@@ -6,6 +6,8 @@ On Breast Cancer Detection: An Application of Machine Learning Algorithms on the
 ![](https://img.shields.io/badge/license-Apache--2.0-blue.svg)
 [![PyPI](https://img.shields.io/pypi/pyversions/Django.svg)]()
 
+*Note*: This repository is retired and will not be ported to use TF2. However, you may use this as a reference in doing so.
+
 *This paper was presented at the 2nd International Conference on Machine Learning and Soft Computing (ICMLSC) in Phu Quoc Island, Vietnam last February 2-4, 2018.*
 
 The full paper on this project may be read at [arXiv.org](http://arxiv.org/abs/1711.07831).
